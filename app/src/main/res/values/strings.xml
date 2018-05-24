@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">APU Pre-Loved</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="pre_loved"><b>P&#160;R&#160;E&#160;-&#160;L&#160;O&#160;V&#160;E&#160;D</b></string>
+    <string name="register">Register</string>
+    <string name="register_here">Register here</string>
+    <string name="TnC"><b>Terms and Conditions</b></string>
+    <string name="signup"><b>SIGN UP</b></string>
+    <string name="signin"><b>SIGN IN</b></string>
+
+    <string name="shared_transaction">sharedtransaction</string>
+    <string name="username">0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
+
+    <string name="termsandconditions">
+        In your digital interactions with other users (including, but not limited to: postings and messaging using 3rd party), you agree to conduct yourself civilly and respectful. While using this application, you agree that you shall not under any circumstances harass or make mischief against any other user of this application. The admin reserves the right to determine, at its sole discretion, what constitutes harassment or mischief, and where that has occured; and may also at its sole discretion, partially or completely deny service to any infringing party. As part of these efforts, the admin may enlist the help of its active users to moderate flagged postings and messages and other content to determine if a user\'s conduct is harmful to the community.
+    </string>
+    <string name="title_activity_sample">sample</string>
+    <string name="title_home">Home</string>
+    <string name="title_add">Add</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="title_add_item">What will you sell?</string>
+    <string name="quality_question"><b>Quality?</b> slide from 1 (low) - 5 (high)</string>
+    <string name="image_upload">Upload an image</string>
+</resources>

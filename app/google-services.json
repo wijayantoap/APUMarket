@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "162987072800",
+    "firebase_url": "https://apupreloved.firebaseio.com",
+    "project_id": "apupreloved",
+    "storage_bucket": "apupreloved.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162987072800:android:c8b616502916cce0",
+        "android_client_info": {
+          "package_name": "com.application.wijayantoap.apupre_loved"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162987072800-pqo5r8alees8ftfupv3g38slct6pki0d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.application.wijayantoap.apupre_loved",
+            "certificate_hash": "c379bfbadc26ce59c2391f66af9ba64be5cb6ef3"
+          }
+        },
+        {
+          "client_id": "162987072800-9trrgtk13u76gl9k6rkf553qkoocj4k4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCos85w4xoaRzbSzeCSgWIuLVPXi1DHVLA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162987072800-9trrgtk13u76gl9k6rkf553qkoocj4k4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

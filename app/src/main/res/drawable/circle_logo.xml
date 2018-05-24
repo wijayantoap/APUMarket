@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorWhite"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/apu_logo"
+        android:bottom="60dp"
+        android:left="30dp"
+        android:right="30dp"
+        android:top="0dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/colorRed"/>//Background Color
+        </shape>
+    </item>
+</layer-list>
