@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">APU Pre-Loved</string>
+    <string name="app_name">APU Market</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_login">LoginActivity</string>
 
@@ -23,8 +23,20 @@
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
+    <string name="title_message">Message</string>
+    <string name="title_list">List</string>
+    <string name="title_user">Users</string>
 
     <string name="title_add_item">What will you sell?</string>
+    <string name="category">Category</string>
     <string name="quality_question"><b>Quality?</b> slide from 1 (low) - 5 (high)</string>
     <string name="image_upload">Upload an image</string>
+
+    <string name="currencty">RM</string>
+
+    <string name="country_code">+60</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
 </resources>

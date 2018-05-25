@@ -1,28 +1,30 @@
 package com.application.wijayantoap.apupre_loved;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import static android.view.View.VISIBLE;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
+ * {@link AdminReportFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link AdminReportFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class AdminReportFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +36,7 @@ public class ProfileFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ProfileFragment() {
+    public AdminReportFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +46,11 @@ public class ProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
+     * @return A new instance of fragment AdminReportFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static AdminReportFragment newInstance(String param1, String param2) {
+        AdminReportFragment fragment = new AdminReportFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +71,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_admin_report, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -79,20 +81,37 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CardView cardViewExit = (CardView) getActivity().findViewById(R.id.cardViewExit);
-        cardViewExit.setOnClickListener(new View.OnClickListener() {
+        // This is a demo toggle button which will be used later
+        View test1 = getActivity().findViewById(R.id.test1);
+        final ToggleButton toggleButton = (ToggleButton) test1.findViewById(R.id.toggleButton);
+        final TextView textView =  (TextView) test1.findViewById(R.id.textReport);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    textView.setVisibility(VISIBLE);
+                } else {
+                    textView.setVisibility(View.GONE);
+                }
+            }
+        });
+        View test2 = getActivity().findViewById(R.id.test2);
+        final ToggleButton toggleButton1 = (ToggleButton) test2.findViewById(R.id.toggleButton);
+        final TextView textView1 =  (TextView) test2.findViewById(R.id.textReport);
+        toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    textView1.setVisibility(VISIBLE);
+                } else {
+                    textView1.setVisibility(View.GONE);
+                }
             }
         });
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -100,7 +119,6 @@ public class ProfileFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            //Toast.makeText(context, "Profile Fragment Attached", Toast.LENGTH_SHORT).show();
 
         }
     }

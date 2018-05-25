@@ -53,37 +53,43 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Username and Password must not be empty", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
-                    mDialog.setMessage("Please wait");
-                    mDialog.show();
+                    if (usernameValidate.matches("admin") && passwordValidate.matches("admin")) {
+                        Intent i = new Intent(LoginActivity.this, AdminActivity.class);
+                        startActivity(i);
+                    } else {
 
-                    table_user.addValueEventListener(new ValueEventListener() {
+                        final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
+                        mDialog.setMessage("Please wait");
+                        mDialog.show();
 
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // Check if user does not exist in database
-                            if (dataSnapshot.child(editUsername.getText().toString()).exists()) {
-                                // Get User information
-                                mDialog.dismiss();
-                                User user = dataSnapshot.child(editUsername.getText().toString()).getValue(User.class);
-                                if (user.getPassword().equals(editPassword.getText().toString())) {
-                                    Toast.makeText(LoginActivity.this, "Log in success!", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(i);
+                        table_user.addValueEventListener(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // Check if user does not exist in database
+                                if (dataSnapshot.child(editUsername.getText().toString()).exists()) {
+                                    // Get User information
+                                    mDialog.dismiss();
+                                    User user = dataSnapshot.child(editUsername.getText().toString()).getValue(User.class);
+                                    if (user.getPassword().equals(editPassword.getText().toString())) {
+                                        Toast.makeText(LoginActivity.this, "Log in success!", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(i);
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Log in failed", Toast.LENGTH_SHORT).show();
+                                    }
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Log in failed", Toast.LENGTH_SHORT).show();
+                                    mDialog.dismiss();
+                                    Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                mDialog.dismiss();
-                                Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
         });

@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <View
+            android:id="@+id/viewBlue"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/colorAccent"
@@ -46,14 +47,14 @@
             android:layout_below="@+id/textHi"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:text="welcome to APU Pre-Loved"
+            android:text="welcome to APU Market"
             android:textColor="@color/colorWhite" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textWelcome"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp">
 
@@ -69,6 +70,34 @@
                 android:imeOptions="actionSearch"/>
 
         </android.support.v7.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewBlue"
+            android:background="@color/colorGrayLight">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include
+                    layout="@layout/product_item">
+                </include>
+                <include
+                    layout="@layout/product_item">
+                </include>
+                <include
+                    layout="@layout/product_item">
+                </include>
+                <include
+                    layout="@layout/product_item">
+                </include>
+            </LinearLayout>
+
+
+
+        </ScrollView>
 
     </RelativeLayout>
 
