@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment fragmentHome;
     private AddItemFragment fragmentAdd;
     private ProfileFragment fragmentProfile;
+
+
+    public FirebaseRecyclerAdapter adapter;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

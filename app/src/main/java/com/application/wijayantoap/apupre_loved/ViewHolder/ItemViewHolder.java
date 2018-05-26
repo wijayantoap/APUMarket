@@ -11,7 +11,7 @@ import com.application.wijayantoap.apupre_loved.R;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, itemDate, itemQuality;
+    public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, itemDate, itemQuality;
     public ImageView itemImage;
 
     private ItemClickListener itemClickListener;
@@ -37,6 +37,6 @@ public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, 
 
     @Override
     public void onClick(View v) {
-        itemClickListener.onClick(v, getAdapterPosition(),false);
+        itemClickListener.onClick(v, getAdapterPosition(), false);
     }
 }

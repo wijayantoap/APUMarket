@@ -2,6 +2,7 @@ package com.application.wijayantoap.apupre_loved;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +12,17 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.application.wijayantoap.apupre_loved.Model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -23,60 +34,80 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    TextView textViewUser, txtEmail, txtReport, txtItem;
+    CardView cardViewProduct;
 
     private OnFragmentInteractionListener mListener;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference table_user = database.getReference("User");
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-    }
+        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
+        final String username = sharedPreferences.getString("username", "");
+
+        textViewUser = (TextView) view.findViewById(R.id.textUser);
+        txtEmail = (TextView) view.findViewById(R.id.textEmail);
+        txtReport = (TextView) view.findViewById(R.id.textViewers);
+        txtItem = (TextView) view.findViewById(R.id.textItems);
+
+        cardViewProduct = (CardView) view.findViewById(R.id.cardViewProduct);
+        cardViewProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get category user and send to new activity
+                Intent intent = new Intent(getActivity(), UserItemActivity.class);
+                // get category id to filter
+                intent.putExtra("usernameExtra", username);
+                startActivity(intent);
+            }
+        });
+
+        textViewUser.setText(username);
+
+        table_user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(username).getValue(User.class);
+
+                String email = user.getEmail();
+                int report = user.getReport();
+                int item = user.getItem();
+
+                txtEmail.setText(email);
+                txtReport.setText(String.valueOf(report));
+                txtItem.setText(String.valueOf(item));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return view;
     }
 
 
@@ -87,8 +118,10 @@ public class ProfileFragment extends Fragment {
         cardViewExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                logout();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
     }
@@ -124,5 +157,13 @@ public class ProfileFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void logout() {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("username", "");
+        editor.apply();
     }
 }

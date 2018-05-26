@@ -1,6 +1,7 @@
 package com.application.wijayantoap.apupre_loved;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imgLogo;
     private TextView txtShown;
-
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,12 @@ public class SplashActivity extends AppCompatActivity {
         imgLogo.startAnimation(anim);
         txtShown.startAnimation(anim);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
+        if (username != null && !username.matches("")) {
+            Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+        }
         //Set timer for the animation to be executed
         Thread timer = new Thread() {
             public void run() {
@@ -34,15 +42,23 @@ public class SplashActivity extends AppCompatActivity {
                     sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                finally{
-                    final Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(i);
+                } finally {
+                    loadUser();
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
                 }
             }
         };
         timer.start();
+    }
+
+    public void loadUser() {
+        if (username.matches("") || username == null) {
+            final Intent intentLogin = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intentLogin);
+        } else if (username != null && !username.matches("")){
+            final Intent intentMain = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intentMain);
+        }
     }
 }

@@ -190,7 +190,8 @@
             android:layout_height="180dp"
             android:layout_below="@id/textDescription"
             android:src="@drawable/no_image_found"
-            android:scaleType="centerInside"/>
+            android:scaleType="fitCenter"
+            />
 
     </RelativeLayout>
 

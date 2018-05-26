@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@id/imgUser"
-                        android:text="TP038091"
+                        android:text=""
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                         android:layout_marginRight="3dp"
                         android:layout_marginTop="1dp"
                         android:layout_toRightOf="@+id/imgUser"
-                        android:text="TP038091@mail.apu.edu.my" />
+                        android:text="" />
 
                     <ImageView
                         android:id="@+id/imgUser"
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@id/imgViewer"
-                        android:text="1754"
+                        android:text=""
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@+id/imgProduct"
-                        android:text="3"
+                        android:text=""
                         android:textSize="16sp"
                         android:textStyle="bold" />
 

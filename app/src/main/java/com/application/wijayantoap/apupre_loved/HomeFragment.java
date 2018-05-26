@@ -1,7 +1,9 @@
 package com.application.wijayantoap.apupre_loved;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.StringTokenizer;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.VISIBLE;
 
 
@@ -70,16 +73,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container,false);
 
         // set name for user
-        String username = Common.currentUser.getEmail();
-        StringTokenizer tokens = new StringTokenizer(username, "@");
-        String first = tokens.nextToken();// this will contain string before @
+        //String username = Common.currentUser.getEmail();
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+
+        //StringTokenizer tokens = new StringTokenizer(username, "@");
+        //String first = tokens.nextToken();// this will contain string before @
         // set name for user
         txtUsername = (TextView) view.findViewById(R.id.textUsername);
-        txtUsername.setText(first);
+        txtUsername.setText(username);
 
         // load category
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCategory);
@@ -113,7 +119,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull CategoryViewHolder holder, int position, @NonNull Category model) {
+            protected void onBindViewHolder(@NonNull final CategoryViewHolder holder, int position, @NonNull final Category model) {
                 holder.txtMenuName.setText(model.getName());
                 Picasso.with(getActivity()).load(model.getImage())
                         .into(holder.imageView);
@@ -155,10 +161,14 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        adapter.startListening();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //adapter.startListening();
-
     }
 
     @Override
@@ -170,13 +180,6 @@ public class HomeFragment extends Fragment {
             //Toast.makeText(context, "Home Fragment Attached", Toast.LENGTH_SHORT).show();
         }
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
 
 
     public interface OnFragmentInteractionListener {

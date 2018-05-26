@@ -3,8 +3,10 @@ package com.application.wijayantoap.apupre_loved;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         mDialog.setMessage("Please wait");
                         mDialog.show();
 
-                        table_user.addValueEventListener(new ValueEventListener() {
+                        table_user.addListenerForSingleValueEvent(new ValueEventListener() {
 
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Log in success!", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                         Common.currentUser = user;
+                                        saveInfo();
                                         startActivity(i);
                                         finish();
                                     } else {
@@ -110,5 +113,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void saveInfo() {
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString("username", editUsername.getText().toString());
+        editor.putString("password", editPassword.getText().toString());
+        editor.apply();
+
+        Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
+    }
 }

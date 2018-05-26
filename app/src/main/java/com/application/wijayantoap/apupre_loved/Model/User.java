@@ -5,6 +5,7 @@ public class User {
     private String Password;
     private int Report;
     private String Status;
+    private int Item;
 
     public User() {
 
@@ -14,11 +15,12 @@ public class User {
         Email = email;
     }
 
-    public User(String email, String password, int report, String status) {
+    public User(String email, String password, int report, String status, int item) {
         Email = email;
         Password = password;
         Report = report;
         Status = status;
+        Item = item;
     }
 
     public int getReport() {
@@ -41,7 +43,7 @@ public class User {
         return Email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         Email = email;
     }
 
@@ -51,5 +53,14 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+
+    public int getItem() {
+        return Item;
+    }
+
+    public void setItem(int item) {
+        Item = item;
     }
 }
