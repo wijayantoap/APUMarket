@@ -35,13 +35,14 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AdminActivity"
-            android:label="@string/title_activity_admin">
-
+            android:label="@string/title_activity_admin"></activity>
+        <activity
+            android:name=".ItemActivity"
+            android:label="@string/title_activity_item"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.wijayantoap.apupre_loved.Common.Common;
 import com.application.wijayantoap.apupre_loved.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,7 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                                     if (user.getPassword().equals(editPassword.getText().toString())) {
                                         Toast.makeText(LoginActivity.this, "Log in success!", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        Common.currentUser = user;
                                         startActivity(i);
+                                        finish();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Log in failed", Toast.LENGTH_SHORT).show();
                                     }

@@ -14,9 +14,7 @@
             android:id="@+id/viewBlue"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/colorAccent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"></View>
+            android:background="@color/colorAccent"></View>
 
         <TextView
             android:id="@+id/textHi"
@@ -77,23 +75,11 @@
             android:layout_below="@id/viewBlue"
             android:background="@color/colorGrayLight">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewCategory"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
-                    layout="@layout/product_item">
-                </include>
-                <include
-                    layout="@layout/product_item">
-                </include>
-                <include
-                    layout="@layout/product_item">
-                </include>
-                <include
-                    layout="@layout/product_item">
-                </include>
-            </LinearLayout>
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 
 

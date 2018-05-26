@@ -33,5 +33,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:12.0.1'
     implementation 'com.github.DanielMartinus:Stepper-Touch:0.6'
     implementation 'com.github.abdularis:androidbuttonprogress:v0.1-alpha5'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.firebaseui:firebase-ui-database:3.3.0'
 }
 apply plugin: 'com.google.gms.google-services'

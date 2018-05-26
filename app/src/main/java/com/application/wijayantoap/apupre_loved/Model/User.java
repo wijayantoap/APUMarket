@@ -1,28 +1,48 @@
 package com.application.wijayantoap.apupre_loved.Model;
 
 public class User {
-    private String Username;
+    private String Email;
     private String Password;
+    private int Report;
+    private String Status;
 
     public User() {
 
     }
 
-    public User(String username) {
-        Username = username;
+    public User(String email) {
+        Email = email;
     }
 
-    public User(String username, String password) {
-        Username = username;
+    public User(String email, String password, int report, String status) {
+        Email = email;
         Password = password;
+        Report = report;
+        Status = status;
     }
 
-    public String getUsername() {
-        return Username;
+    public int getReport() {
+        return Report;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setReport(int report) {
+        Report = report;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setemail(String email) {
+        Email = email;
     }
 
     public String getPassword() {
