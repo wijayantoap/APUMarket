@@ -59,7 +59,7 @@ public class UserItemActivity extends AppCompatActivity {
     }
 
     private void loadListItem(String categoryId) {
-        Query query = itemList.orderByChild("Username").equalTo(usernameExtra);
+        Query query = itemList.orderByChild("username").equalTo(usernameExtra);
 
         FirebaseRecyclerOptions<Item> options =
                 new FirebaseRecyclerOptions.Builder<Item>()
@@ -102,7 +102,7 @@ public class UserItemActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //adapter.startListening();
+        adapter.startListening();
     }
 
     @Override

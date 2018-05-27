@@ -2,6 +2,7 @@ package com.application.wijayantoap.apupre_loved;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -110,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         table_user.child(validateUsername).setValue(user);
                                         Toast.makeText(RegisterActivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                                        saveInfo();
                                         startActivity(i);
                                         finish();
                                     }
@@ -144,5 +146,16 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void saveInfo() {
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("username", editUsername.getText().toString());
+        editor.putString("password", editPassword.getText().toString());
+        editor.apply();
+
+        Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
     }
 }
