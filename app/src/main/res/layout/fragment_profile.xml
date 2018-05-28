@@ -60,7 +60,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="25dp"
-                        android:background="@drawable/apu_logo" />
+                        android:src="@drawable/circle_logo_gray" />
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/cardViewExit"
@@ -68,9 +68,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        app:cardElevation="4dp"
                         android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardElevation="4dp">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -79,7 +79,6 @@
                             android:padding="5dp" />
 
                     </android.support.v7.widget.CardView>
-
 
 
                 </RelativeLayout>
@@ -105,11 +104,11 @@
                     android:layout_margin="3dp">
 
                     <TextView
-                        android:id="@+id/textViewers"
+                        android:id="@+id/textReports"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:layout_toRightOf="@id/imgViewer"
+                        android:layout_toRightOf="@id/imgReport"
                         android:text=""
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -118,20 +117,20 @@
                         android:id="@+id/text3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textViewers"
+                        android:layout_below="@id/textReports"
                         android:layout_marginTop="1dp"
-                        android:layout_toRightOf="@+id/imgViewer"
-                        android:text="Viewers" />
+                        android:layout_toRightOf="@+id/imgReport"
+                        android:text="Reports" />
 
                     <ImageView
-                        android:id="@+id/imgViewer"
+                        android:id="@+id/imgReport"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="25dp"
-                        android:background="@drawable/ic_viewer" />
+                        android:background="@drawable/ic_report" />
 
                 </RelativeLayout>
 
@@ -141,9 +140,9 @@
                 android:id="@+id/cardViewProduct"
                 android:layout_width="180dp"
                 android:layout_height="85dp"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/cardViewUser"
                 android:layout_marginTop="5dp"
-                android:layout_alignParentRight="true"
                 android:background="@color/colorWhite"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -220,33 +219,17 @@
                     <ScrollView
                         android:id="@+id/scrollRecentActivity"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp">
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/textRecentActivity">
 
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerViewProfileActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
                     </ScrollView>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@id/scrollRecentActivity"
-                        android:background="@color/colorGrayLight"></View>
-
-                    <TextView
-                        android:id="@+id/textSeeMore"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/scrollRecentActivity"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="See More"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
                 </RelativeLayout>
-
 
             </android.support.v7.widget.CardView>
 
@@ -291,9 +274,8 @@
                 android:layout_below="@id/layoutSetting"
                 android:background="@color/colorDarkGray"></View>
 
-
             <RelativeLayout
-                android:id="@+id/layoutReport"
+                android:id="@+id/layoutSendReport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewTopReport"
@@ -302,26 +284,21 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textReport"
+                    android:id="@+id/textSendRpeort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_toRightOf="@id/imgReport"
-                    android:text="Report"
+                    android:layout_toRightOf="@id/imgSendReport"
+                    android:text="Settings"
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/imgReport"
+                    android:id="@+id/imgSendReport"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_report" />
+                    android:background="@drawable/ic_send_report" />
 
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_below="@id/layoutReport"></View>
 
         </RelativeLayout>
 

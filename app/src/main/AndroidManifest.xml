@@ -42,8 +42,10 @@
         <activity
             android:name=".ItemActivity"
             android:label="@string/title_activity_item"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".UserItemActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".UserItemActivity"
+            android:label="@string/title_activity_user_item"></activity>
     </application>
 
 </manifest>

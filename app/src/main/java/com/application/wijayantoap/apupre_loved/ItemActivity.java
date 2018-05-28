@@ -65,11 +65,12 @@ public class ItemActivity extends AppCompatActivity {
         itemList = database.getReference("Item");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItem);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         ImageView imageBackground = (ImageView) findViewById(R.id.image_id);
+
 
         // get intent
         if (getIntent() != null) {
@@ -107,6 +108,7 @@ public class ItemActivity extends AppCompatActivity {
 
             loadListItem(categoryId);
         }
+        loadListItem(categoryId);
     }
 
     private void loadListItem(String categoryId) {
@@ -146,9 +148,7 @@ public class ItemActivity extends AppCompatActivity {
             }
 
         };
-        //adapter.startListening();
         recyclerView.setAdapter(adapter);
-        Toast.makeText(this, "" + categoryId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -160,6 +160,6 @@ public class ItemActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        //adapter.stopListening();
+        adapter.stopListening();
     }
 }

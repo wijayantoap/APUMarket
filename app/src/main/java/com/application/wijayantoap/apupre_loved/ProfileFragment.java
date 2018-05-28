@@ -9,18 +9,29 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
+import com.application.wijayantoap.apupre_loved.Model.Activity;
+import com.application.wijayantoap.apupre_loved.Model.Item;
 import com.application.wijayantoap.apupre_loved.Model.User;
+import com.application.wijayantoap.apupre_loved.ViewHolder.ItemViewHolder;
+import com.application.wijayantoap.apupre_loved.ViewHolder.UserActivityViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -35,12 +46,19 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class ProfileFragment extends Fragment {
 
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+
+    String username;
+
     TextView textViewUser, txtEmail, txtReport, txtItem;
     CardView cardViewProduct;
 
     private OnFragmentInteractionListener mListener;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference table_user = database.getReference("User");
+    final DatabaseReference table_activity = database.getReference("Activity");
+    FirebaseRecyclerAdapter adapter;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -66,11 +84,11 @@ public class ProfileFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
-        final String username = sharedPreferences.getString("username", "");
+        username = sharedPreferences.getString("username", "");
 
         textViewUser = (TextView) view.findViewById(R.id.textUser);
         txtEmail = (TextView) view.findViewById(R.id.textEmail);
-        txtReport = (TextView) view.findViewById(R.id.textViewers);
+        txtReport = (TextView) view.findViewById(R.id.textReports);
         txtItem = (TextView) view.findViewById(R.id.textItems);
 
         cardViewProduct = (CardView) view.findViewById(R.id.cardViewProduct);
@@ -106,7 +124,11 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
+        // load activity
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewProfileActivity);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        loadActivity(username);
         return view;
     }
 
@@ -165,5 +187,42 @@ public class ProfileFragment extends Fragment {
 
         editor.putString("username", "");
         editor.apply();
+    }
+
+    private void loadActivity(String username) {
+        Query query = table_activity.orderByChild("username").equalTo(username);
+
+        FirebaseRecyclerOptions<Activity> options =
+                new FirebaseRecyclerOptions.Builder<Activity>()
+                        .setQuery(query, Activity.class)
+                        .build();
+        adapter = new FirebaseRecyclerAdapter<Activity, UserActivityViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull UserActivityViewHolder holder, int position, @NonNull Activity model) {
+                holder.textDetails.setText(model.getDetails());
+                holder.textDate.setText(model.getDate());
+            }
+
+            @Override
+            public UserActivityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_activity_for_user_item, parent, false);
+
+                return new UserActivityViewHolder(view);
+            }
+        };
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

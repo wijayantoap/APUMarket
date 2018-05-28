@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/product_item_margin"
     android:layout_marginRight="@dimen/product_item_margin"
     android:layout_marginTop="@dimen/product_item_margin"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
-            android:layout_marginLeft="@dimen/product_item_margin"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/textCurrency"
             android:text="PRICE"
             android:textColor="@color/colorAccent"
@@ -61,11 +61,43 @@
             />
 
         <TextView
-            android:id="@+id/textUsername"
+            android:id="@+id/textQNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
             android:layout_toRightOf="@id/textSeperate"
+            android:text="Quality: "
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textQuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTitle"
+            android:layout_toRightOf="@id/textQNumber"
+            android:text="Quality"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textSeperate2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/textQuality"
+            android:text="|"
+            android:textSize="@dimen/text_normal"
+            />
+
+        <TextView
+            android:id="@+id/textUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTitle"
+            android:layout_toRightOf="@id/textSeperate2"
             android:text="TPNUMBER"
             android:textSize="@dimen/text_normal"
             android:textStyle="bold"/>
@@ -77,45 +109,14 @@
             android:layout_below="@id/textPrice"
             android:layout_marginLeft="@dimen/product_item_margin"
             android:layout_marginRight="@dimen/product_item_margin"
+            android:layout_marginTop="@dimen/product_item_margin"
+            android:layout_marginBottom="5dp"
             android:text="DESCRIPTION asjkhdhjkasdjhksdahjksadjksadhjksadjhkhasjkdhjksadhjkasdhjksadhkjsadhkjsdahkjsadhkjsadhkjsadhjksdahjksadhkjjhksadhjkasdhjkasdjhkasdhkjasdhkjasdhkj"
             android:textSize="@dimen/text_normal"
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_toLeftOf="@+id/layoutDelete"
-            android:layout_below="@id/textTitle"
-            android:layout_marginRight="@dimen/product_item_margin"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@drawable/ic_flag" />
-
-            <TextView
-                android:id="@+id/textFlagNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="@dimen/text_normal"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                />
-
-            <TextView
-                android:id="@+id/textFlag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flag"
-                android:textSize="@dimen/text_normal"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutDelete"
+            android:id="@+id/layoutFlag"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
@@ -126,13 +127,13 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:background="@drawable/ic_delete" />
+                android:background="@drawable/ic_flag" />
 
             <TextView
-                android:id="@+id/textDelete"
+                android:id="@+id/textFlag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="0"
                 android:textSize="@dimen/text_normal"
                 />
 
@@ -147,10 +148,13 @@
             android:background="@color/colorGrayLight"></View>
 
         <LinearLayout
+            android:id="@+id/layoutPhone"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_below="@id/viewLine"
             android:layout_marginLeft="@dimen/product_item_margin"
+            android:layout_marginTop="@dimen/product_item_margin"
+            android:layout_marginBottom="@dimen/product_item_margin"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -177,19 +181,51 @@
             android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/viewLine"
-            android:layout_marginRight="@dimen/product_item_margin"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="@dimen/product_item_margin"
             android:text="DATE POSTED"
             android:textSize="@dimen/text_normal"
+            android:gravity="center_vertical"
             android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/layoutDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/viewLine"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/product_item_margin"
+            android:layout_marginTop="@dimen/product_item_margin"
+            android:layout_marginBottom="@dimen/product_item_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/ic_delete" />
+
+            <TextView
+                android:id="@+id/textDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewLine"
+                android:autoLink="phone"
+                android:text="Swipe to delete"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
 
         <ImageView
             android:id="@+id/imgItem"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:layout_below="@id/textDescription"
             android:src="@drawable/no_image_found"
             android:scaleType="centerInside"/>

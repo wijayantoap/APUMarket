@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
-            android:layout_marginLeft="@dimen/product_item_margin"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/textCurrency"
             android:text="PRICE"
             android:textColor="@color/colorAccent"
@@ -81,13 +81,24 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/textSeperateQuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTitle"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/textQuality"
+            android:text="/5"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"/>
+
+        <TextView
             android:id="@+id/textSeperate2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_toRightOf="@id/textQuality"
+            android:layout_toRightOf="@id/textSeperateQuality"
             android:text="|"
             android:textSize="@dimen/text_normal"
             />
@@ -107,8 +118,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textPrice"
+            android:layout_marginTop="@dimen/product_item_margin"
             android:layout_marginLeft="@dimen/product_item_margin"
             android:layout_marginRight="@dimen/product_item_margin"
+            android:layout_marginBottom="5dp"
             android:text="DESCRIPTION asjkhdhjkasdjhksdahjksadjksadhjksadjhkhasjkdhjksadhjkasdhjksadhkjsadhkjsdahkjsadhkjsadhkjsadhjksdahjksadhkjjhksadhjkasdhjkasdjhkasdhkjasdhkjasdhkj"
             android:textSize="@dimen/text_normal"
             />
@@ -149,6 +162,8 @@
             android:layout_height="30dp"
             android:layout_below="@id/viewLine"
             android:layout_marginLeft="@dimen/product_item_margin"
+            android:layout_marginTop="@dimen/product_item_margin"
+            android:layout_marginBottom="@dimen/product_item_margin"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -165,7 +180,7 @@
                 android:layout_below="@id/viewLine"
                 android:autoLink="phone"
                 android:text="+601128991963"
-                android:textSize="@dimen/text_normal"
+                android:textSize="@dimen/text_big"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -178,16 +193,17 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/viewLine"
             android:layout_marginRight="@dimen/product_item_margin"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="@dimen/product_item_margin"
             android:text="DATE POSTED"
-            android:textSize="@dimen/text_normal"
+            android:textSize="@dimen/text_big"
             android:textStyle="bold"/>
 
 
         <ImageView
             android:id="@+id/imgItem"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:layout_below="@id/textDescription"
             android:src="@drawable/no_image_found"
             android:scaleType="fitCenter"

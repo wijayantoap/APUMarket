@@ -8,13 +8,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <View
             android:id="@+id/viewBlue"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/colorAccent"></View>
+            android:background="@color/colorPrimary"></View>
 
         <TextView
             android:id="@+id/textHi"

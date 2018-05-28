@@ -12,13 +12,20 @@
     <dimen name="drawable_padding">10dp</dimen>
     <dimen name="add_item_corner_radius">0dp</dimen>
 
-    <dimen name="product_item_margin">5dp</dimen>
+    <dimen name="product_item_margin">10dp</dimen>
 
     <dimen name="normal_card">2dp</dimen>
+
+    <dimen name="list_activity_margin_big">20dp</dimen>
+    <dimen name="list_activity_margin_normal">5dp</dimen>
+
+    <dimen name="list_item_activity_for_user_margin_normal">10dp</dimen>
+    <dimen name="list_item_activity_for_user_margin_big">20dp</dimen>
 
     <dimen name="text_title">18sp</dimen>
     <dimen name="text_normal">12sp</dimen>
     <dimen name="text_big">14sp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
 </resources>

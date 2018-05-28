@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
 
         // load category
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCategory);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        //adapter.stopListening();
+        adapter.stopListening();
     }
 
     @Override

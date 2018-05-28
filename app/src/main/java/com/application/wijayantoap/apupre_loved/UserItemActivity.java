@@ -1,6 +1,8 @@
 package com.application.wijayantoap.apupre_loved;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
 public class UserItemActivity extends AppCompatActivity {
+
 
     ImageView imageView;
 
@@ -45,7 +48,7 @@ public class UserItemActivity extends AppCompatActivity {
         itemList = database.getReference("Item");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItemUser);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -69,7 +72,7 @@ public class UserItemActivity extends AppCompatActivity {
             @Override
             public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.product_item, parent, false);
+                        .inflate(R.layout.admin_product_item, parent, false);
 
                 return new ItemViewHolder(view);
             }
