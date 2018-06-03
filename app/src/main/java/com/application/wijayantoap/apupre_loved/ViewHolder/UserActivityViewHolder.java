@@ -14,5 +14,6 @@ public class UserActivityViewHolder extends RecyclerView.ViewHolder{
 
         textDetails = (TextView) itemView.findViewById(R.id.textActivity);
         textDate = (TextView) itemView.findViewById(R.id.textActivityDate);
+        textUsername = (TextView) itemView.findViewById(R.id.textUsername);
     }
 }

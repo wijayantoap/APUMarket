@@ -1,6 +1,7 @@
 package com.application.wijayantoap.apupre_loved;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,40 +10,31 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    FragmentTransaction transaction;
-
     private HomeFragment fragmentHome;
     private AddItemFragment fragmentAdd;
     private ProfileFragment fragmentProfile;
 
-
-    public FirebaseRecyclerAdapter adapter;
-
+    boolean doubleBackToExitPressedOnce = false;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //transaction.replace(R.id.content, new HomeFragment()).commit();
                     displayFragment(fragmentHome, fragmentAdd, fragmentProfile);
                     return true;
                 case R.id.navigation_dashboard:
-                    //transaction.replace(R.id.content, new AddItemFragment()).commit();
                     displayFragment(fragmentAdd, fragmentHome, fragmentProfile);
                     return true;
                 case R.id.navigation_notifications:
-                    //transaction.replace(R.id.content, new ProfileFragment()).commit();
                     displayFragment(fragmentProfile, fragmentHome, fragmentAdd);
                     return true;
             }
@@ -65,13 +57,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         displayFragment(fragmentHome, fragmentAdd, fragmentProfile);
-
-        /*
-        fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.content, new HomeFragment(), "home").commit();
-        fragmentManager.executePendingTransactions();
-        */
     }
 
     protected void displayFragment(Fragment show, Fragment hide1, Fragment hide2) {
@@ -92,4 +77,22 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
 }

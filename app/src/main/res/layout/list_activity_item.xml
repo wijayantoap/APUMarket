@@ -59,7 +59,7 @@
                 android:textColor="@color/colorGray"/>
 
             <TextView
-                android:id="@+id/textDate"
+                android:id="@+id/textActivityDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATE"

@@ -1,6 +1,7 @@
 package com.application.wijayantoap.apupre_loved;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -140,10 +142,19 @@ public class ProfileFragment extends Fragment {
         cardViewExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                new AlertDialog.Builder(getActivity())
+                        .setMessage("Are you sure you want to exit?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                logout();
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
     }

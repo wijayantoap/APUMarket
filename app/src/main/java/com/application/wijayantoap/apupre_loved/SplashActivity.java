@@ -56,9 +56,12 @@ public class SplashActivity extends AppCompatActivity {
         if (username.matches("") || username == null) {
             final Intent intentLogin = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intentLogin);
-        } else if (username != null && !username.matches("")){
+        } else if (username != null && !username.matches("") && !username.matches("admin")){
             final Intent intentMain = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intentMain);
+        } else if (username.matches("admin")) {
+            final Intent intentAdmin = new Intent(SplashActivity.this, AdminActivity.class);
+            startActivity(intentAdmin);
         }
     }
 }

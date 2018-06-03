@@ -10,39 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include><include
-            layout="@layout/list_activity_item">
-        </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-            <include
-                layout="@layout/list_activity_item">
-            </include>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     </ScrollView>
 

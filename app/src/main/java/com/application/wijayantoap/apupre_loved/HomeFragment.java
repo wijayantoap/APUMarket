@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +51,8 @@ public class HomeFragment extends Fragment {
     TextView txtUsername;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+
+    CardView editFind;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -86,6 +90,15 @@ public class HomeFragment extends Fragment {
         // set name for user
         txtUsername = (TextView) view.findViewById(R.id.textUsername);
         txtUsername.setText(username);
+
+        editFind = view.findViewById(R.id.editFind);
+        editFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // load category
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewCategory);

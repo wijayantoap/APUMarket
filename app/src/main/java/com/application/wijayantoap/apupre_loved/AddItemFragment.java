@@ -78,7 +78,7 @@ public class AddItemFragment extends Fragment {
         stepperTouch.stepper.addStepCallback(new OnStepCallback() {
             @Override
             public void onStep(int value, boolean positive) {
-                Toast.makeText(getActivity().getApplicationContext(), value + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), value + "", Toast.LENGTH_SHORT).show();
             }
         });
     }

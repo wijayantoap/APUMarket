@@ -1,16 +1,22 @@
 package com.application.wijayantoap.apupre_loved;
 
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
@@ -23,8 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
-public class UserItemActivity extends AppCompatActivity {
+import java.util.StringTokenizer;
 
+public class SearchActivity extends AppCompatActivity {
 
     ImageView imageView;
 
@@ -34,37 +41,63 @@ public class UserItemActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference itemList;
 
-    String usernameExtra;
+    String currentSearch;
 
     public FirebaseRecyclerAdapter adapter;
+
+    EditText editFind;
+    ImageView imgBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_item);
+        setContentView(R.layout.activity_search);
+
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(SearchActivity.this, R.style.Theme_AppCompat_Light_Dialog);
+        builder.setTitle("Notice");
+        builder.setMessage(R.string.search_alert);
+        builder.setPositiveButton("OK", null);//second parameter used for onclicklistener
+        builder.show();
 
         // Firebase
-        database= FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         itemList = database.getReference("Item");
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItemUser);
-        //recyclerView.setHasFixedSize(true);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewSearch);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // get intent
-        if (getIntent() != null) {
-            usernameExtra = getIntent().getStringExtra("usernameExtra");
-        }
-        if(!usernameExtra.isEmpty() && usernameExtra != null) {
-            loadListItem(usernameExtra);
-        }
+        loadSearch(currentSearch);
+
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        editFind = findViewById(R.id.editFind);
+        editFind.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    currentSearch = editFind.getText().toString();
+                    loadSearch(currentSearch);
+                    editFind.clearFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
-    private void loadListItem(String categoryId) {
-        Query query = itemList.orderByChild("username").equalTo(usernameExtra);
+    private void loadSearch(String currentSearch) {
+        Query query = itemList.orderByChild("name").startAt(currentSearch).endAt(currentSearch + "\uf8ff");
 
-        FirebaseRecyclerOptions<Item> options =
+        final FirebaseRecyclerOptions<Item> options =
                 new FirebaseRecyclerOptions.Builder<Item>()
                         .setQuery(query, Item.class)
                         .build();
@@ -72,7 +105,7 @@ public class UserItemActivity extends AppCompatActivity {
             @Override
             public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.admin_product_item, parent, false);
+                        .inflate(R.layout.product_item, parent, false);
 
                 return new ItemViewHolder(view);
             }
@@ -98,7 +131,7 @@ public class UserItemActivity extends AppCompatActivity {
             }
 
         };
-        adapter.startListening();
+        //adapter.startListening();
         recyclerView.setAdapter(adapter);
     }
 

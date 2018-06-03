@@ -38,14 +38,23 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdminActivity"
-            android:label="@string/title_activity_admin" />
+            android:label="@string/title_admin"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ItemActivity"
             android:label="@string/title_activity_item"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".UserItemActivity"
-            android:label="@string/title_activity_user_item"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
+            android:name=".UserItemActivity"
+            android:label="@string/title_activity_user_item"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

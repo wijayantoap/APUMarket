@@ -5,29 +5,40 @@
     android:layout_height="match_parent"
     tools:context=".AdminItemFragment">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardViewSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editFind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_find"
+                android:drawablePadding="10dp"
+                android:hint="Search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </android.support.v7.widget.CardView>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_below="@id/cardViewSearch">
 
-            <include layout="@layout/admin_product_item"></include>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-            <include layout="@layout/admin_product_item"></include>
+        </ScrollView>
 
-            <include layout="@layout/admin_product_item"></include>
-
-            <include layout="@layout/admin_product_item"></include>
-
-            <include layout="@layout/admin_product_item"></include>
-
-            <include layout="@layout/admin_product_item"></include>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </RelativeLayout>
 
 </FrameLayout>

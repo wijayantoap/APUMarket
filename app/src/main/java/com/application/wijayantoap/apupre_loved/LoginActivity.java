@@ -58,7 +58,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (usernameValidate.matches("admin") && passwordValidate.matches("admin")) {
                         Intent i = new Intent(LoginActivity.this, AdminActivity.class);
+                        saveInfo();
                         startActivity(i);
+                        finish();
                     } else {
 
                         final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
@@ -118,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("username", editUsername.getText().toString());
-        editor.putString("password", editPassword.getText().toString());
         editor.apply();
 
         Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
