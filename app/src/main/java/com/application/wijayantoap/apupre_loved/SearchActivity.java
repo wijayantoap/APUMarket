@@ -131,7 +131,6 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         };
-        //adapter.startListening();
         recyclerView.setAdapter(adapter);
     }
 

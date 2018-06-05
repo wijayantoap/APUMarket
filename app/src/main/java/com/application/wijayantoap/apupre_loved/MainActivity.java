@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     displayFragment(fragmentHome, fragmentAdd, fragmentProfile);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_add:
                     displayFragment(fragmentAdd, fragmentHome, fragmentProfile);
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_profile:
                     displayFragment(fragmentProfile, fragmentHome, fragmentAdd);
                     return true;
             }

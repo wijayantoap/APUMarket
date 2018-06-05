@@ -108,7 +108,6 @@
                     android:maxLines="10"
                     android:minLines="8"
                     android:padding="@dimen/add_item_padding"
-                    android:scrollHorizontally="false"
                     android:textSize="@dimen/text_big"/>
 
             </android.support.v7.widget.CardView>

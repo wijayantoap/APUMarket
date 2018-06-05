@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class ProfileFragment extends Fragment {
 
     TextView textViewUser, txtEmail, txtReport, txtItem;
     CardView cardViewProduct;
+    RelativeLayout layoutReport;
 
     private OnFragmentInteractionListener mListener;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -88,19 +90,28 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
 
-        textViewUser = (TextView) view.findViewById(R.id.textUser);
-        txtEmail = (TextView) view.findViewById(R.id.textEmail);
-        txtReport = (TextView) view.findViewById(R.id.textReports);
-        txtItem = (TextView) view.findViewById(R.id.textItems);
+        textViewUser = view.findViewById(R.id.textUser);
+        txtEmail = view.findViewById(R.id.textEmail);
+        txtReport = view.findViewById(R.id.textReports);
+        txtItem = view.findViewById(R.id.textItems);
 
-        cardViewProduct = (CardView) view.findViewById(R.id.cardViewProduct);
+        cardViewProduct = view.findViewById(R.id.cardViewProduct);
         cardViewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get category user and send to new activity
                 Intent intent = new Intent(getActivity(), UserItemActivity.class);
                 // get category id to filter
-                intent.putExtra("usernameExtra", username);
+                startActivity(intent);
+            }
+        });
+
+        layoutReport = view.findViewById(R.id.layoutSendReport);
+        layoutReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReportActivity.class);
+                intent.putExtra("emailExtra", txtEmail.getText());
                 startActivity(intent);
             }
         });

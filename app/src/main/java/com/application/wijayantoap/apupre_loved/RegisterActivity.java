@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.wijayantoap.apupre_loved.Model.Activity;
 import com.application.wijayantoap.apupre_loved.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 import me.drakeet.materialdialog.MaterialDialog;
@@ -45,6 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.editPassword);
         editPasswordConfirmation = findViewById(R.id.editPasswordConfirmation);
         cardViewRegister = findViewById(R.id.cardViewRegister);
+
+        DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+        final String date = df.format(Calendar.getInstance().getTime());
 
 
         editEmail.addTextChangedListener(new TextWatcher() {
@@ -76,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         // init Firebase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
+        final DatabaseReference table_activity = database.getReference("Activity");
 
         cardViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,44 +94,53 @@ public class RegisterActivity extends AppCompatActivity {
                 final String validateUsername = editUsername.getText().toString();
                 final String validatePassword = editPassword.getText().toString();
                 String validatePasswordConfirmation = editPasswordConfirmation.getText().toString();
+                int length = editPassword.getText().length();
 
                 if (validateEmail.matches("") || validateUsername.matches("") || validatePassword.matches("")
                         || validatePasswordConfirmation.matches("")) {
                     Toast.makeText(RegisterActivity.this, "Everything must be filled", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (!validatePasswordConfirmation.equals(validatePassword)) {
-                        Toast.makeText(RegisterActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
+                    if (length < 5) {
+                        Toast.makeText(RegisterActivity.this, "Password must be more than 5 characters", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (validateEmail.contains("@mail.apu.edu.my") || validateEmail.contains("@mail.apiit.edu.my")) {
-                            final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
-                            mDialog.setMessage("Loading like crazy");
-                            mDialog.show();
-                            table_user.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    // Check if user already exist
-                                    if (dataSnapshot.child(validateUsername).exists()) {
-                                        mDialog.dismiss();
-                                        Toast.makeText(RegisterActivity.this, "User already exist", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        mDialog.dismiss();
-                                        User user = new User(validateEmail, validatePassword, 0, "active",0);
-                                        table_user.child(validateUsername).setValue(user);
-                                        Toast.makeText(RegisterActivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                                        saveInfo();
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
+                        if (!validatePasswordConfirmation.equals(validatePassword)) {
+                            Toast.makeText(RegisterActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Must use apu email address", Toast.LENGTH_SHORT).show();
+                            if (validateEmail.contains("@mail.apu.edu.my") || validateEmail.contains("@mail.apiit.edu.my")) {
+                                final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
+                                mDialog.setMessage("Loading.. Please wait");
+                                mDialog.show();
+                                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        // Check if user already exist
+                                        if (dataSnapshot.child(validateUsername).exists()) {
+                                            mDialog.dismiss();
+                                            Toast.makeText(RegisterActivity.this, "User already exist", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            mDialog.dismiss();
+                                            User user = new User(validateEmail, validatePassword, 0, "active", 0);
+                                            table_user.child(validateUsername).setValue(user);
+                                            Toast.makeText(RegisterActivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+
+                                            Activity activity = new Activity(validateUsername, "Registered to APU Market", date);
+                                            table_activity.push().setValue(activity);
+                                            saveInfo();
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Must register with APU email address", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 }

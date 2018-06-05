@@ -14,6 +14,7 @@ import android.transition.Slide;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,18 +30,26 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtRegister;
     CardView buttonLogin;
     EditText editUsername, editPassword;
+    LinearLayout layoutReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         txtRegister = findViewById(R.id.textRegister);
         buttonLogin = findViewById(R.id.cardViewLogin);
         editUsername = findViewById(R.id.editUsername);
         editPassword = findViewById(R.id.editPassword);
+        layoutReport = findViewById(R.id.layoutReport);
+
+        layoutReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, ReportActivity.class);
+                startActivity(i);
+            }
+        });
 
         // init Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -52,8 +61,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 String usernameValidate = editUsername.getText().toString();
                 String passwordValidate = editPassword.getText().toString();
+
                 if (usernameValidate.matches("") || passwordValidate.matches("")) {
-                    Toast.makeText(LoginActivity.this, "Username and Password must not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Username and Password can not be empty", Toast.LENGTH_SHORT).show();
                 } else {
 
                     if (usernameValidate.matches("admin") && passwordValidate.matches("admin")) {
@@ -110,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
                 String transitionName = getString(R.string.shared_transaction);
                 ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, sharedView, transitionName);
                 startActivity(i, transitionActivityOptions.toBundle());
-                //startActivity(i);
             }
         });
     }

@@ -27,7 +27,9 @@
     <string name="title_message">Message</string>
     <string name="title_list">List</string>
     <string name="title_user">Users</string>
-    <string name="title_admin">Welcome, Admin</string>
+    <string name="title_admin">Welcome Admin</string>
+    <string name="title_activity_report"></string>
+
 
 
     <string name="home_greeting">welcome to APU Market</string>
