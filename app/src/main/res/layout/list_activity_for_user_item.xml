@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/list_item_activity_for_user_margin_big"
         android:layout_marginBottom="@dimen/list_item_activity_for_user_margin_big"
         android:layout_marginLeft="@dimen/list_item_activity_for_user_margin_normal"
-        android:layout_toLeftOf="@+id/textDate"
+        android:layout_toLeftOf="@+id/textActivityDate"
         android:layout_alignParentLeft="true"/>
 
     <TextView

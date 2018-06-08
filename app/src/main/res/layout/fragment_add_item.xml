@@ -249,8 +249,7 @@
                 android:layout_marginTop="40dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/colorPrimaryDark"
-                app:cardCornerRadius="25dp"
+                app:cardBackgroundColor="@color/colorRed"
                 app:cardElevation="4dp">
 
                 <RelativeLayout

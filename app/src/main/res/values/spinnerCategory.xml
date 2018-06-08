@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="spinnerItems">
-    <item>Select category</item>
-    <item>item2</item>
-    <item>item3</item>
-    <item>item4</item>
+    <item>Miscellaneous</item>
+    <item>Vehicles</item>
+    <item>Electronics</item>
+    <item>Furniture</item>
+    <item>Hobbies</item>
+    <item>Clothes</item>
 </string-array>
 </resources>

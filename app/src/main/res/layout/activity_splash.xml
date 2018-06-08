@@ -12,13 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:gravity="center_vertical"
         tools:ignore="UselessParent">
 
         <ImageView
-            android:layout_marginTop="136dp"
             android:id="@+id/imgLogo"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:transitionName="logo"
             android:src="@drawable/circle_logo"
             tools:ignore="ContentDescription" />
@@ -31,10 +31,25 @@
             android:textSize="20sp"
             android:textColor="@color/colorWhite"
             android:layout_marginTop="0dp"
-            android:text="@string/pre_loved"
+            android:text="@string/market"
             android:typeface="monospace"/>
     </LinearLayout>
 
 
+    <ImageView
+        android:id="@+id/firebaseLogo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/firebase_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/textVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

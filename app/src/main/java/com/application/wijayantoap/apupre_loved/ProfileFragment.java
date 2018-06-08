@@ -99,9 +99,9 @@ public class ProfileFragment extends Fragment {
         cardViewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get category user and send to new activity
+                // get user and send to new activity
                 Intent intent = new Intent(getActivity(), UserItemActivity.class);
-                // get category id to filter
+                intent.putExtra("usernameExtra", textViewUser.getText());
                 startActivity(intent);
             }
         });

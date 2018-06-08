@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
             android:layout_toRightOf="@id/textQNumber"
-            android:text="Quality"
+            android:text="@string/no_quality"
             android:textSize="@dimen/text_normal"
             android:textStyle="bold"/>
 

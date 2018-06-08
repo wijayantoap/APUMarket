@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
-    private ImageView imgLogo;
-    private TextView txtShown;
+    private ImageView imgLogo, firebaseLogo;
+    private TextView txtShown, txtVersion;
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +22,16 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //Declaring interface component to a variable
-        imgLogo = (ImageView) findViewById(R.id.imgLogo);
-        txtShown = (TextView) findViewById(R.id.txtShown);
+        imgLogo = findViewById(R.id.imgLogo);
+        firebaseLogo = findViewById(R.id.firebaseLogo);
+        txtShown = findViewById(R.id.txtShown);
+        txtVersion = findViewById(R.id.textVersion);
         //Set the animation for the ImageView
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.transition);
         imgLogo.startAnimation(anim);
+        firebaseLogo.startAnimation(anim);
         txtShown.startAnimation(anim);
+        txtVersion.startAnimation(anim);
 
         SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");

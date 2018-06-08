@@ -77,30 +77,29 @@ public class ItemActivity extends AppCompatActivity {
             categoryId = getIntent().getStringExtra("CategoryId");
         }
         if(!categoryId.isEmpty() && categoryId != null) {
-            int categoryNumber = Integer.parseInt(categoryId);
 
-            switch (categoryNumber){
-                case 01: setTitle("Vehicles");
+            switch (categoryId){
+                case "Vehicles": setTitle("Vehicles");
                     Picasso.with(this).load("https://images.pexels.com/photos/990113/pexels-photo-990113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                 break;
-                case 02: setTitle("Electronics");
+                case "Electronics": setTitle("Electronics");
                     Picasso.with(this).load("https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                     break;
-                case 03: setTitle("Furniture");
+                case "Furniture": setTitle("Furniture");
                     Picasso.with(this).load("https://images.pexels.com/photos/159839/office-home-house-desk-159839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                     break;
-                case 04: setTitle("Hobbies");
+                case "Hobbies": setTitle("Hobbies");
                     Picasso.with(this).load("https://images.pexels.com/photos/346709/pexels-photo-346709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                     break;
-                case 05: setTitle("Clothes");
+                case "Clothes": setTitle("Clothes");
                     Picasso.with(this).load("https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                     break;
-                case 06: setTitle("Miscellaneous");
+                case "Miscellaneous": setTitle("Miscellaneous");
                     Picasso.with(this).load("https://images.pexels.com/photos/1712/sunglasses-apple-iphone-desk.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                             .into(imageBackground);
                     break;
@@ -112,7 +111,7 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void loadListItem(String categoryId) {
-        Query query = itemList.orderByChild("categoryid").equalTo(categoryId);
+        Query query = itemList.orderByChild("categoryId").equalTo(categoryId);
 
         FirebaseRecyclerOptions<Item> options =
                 new FirebaseRecyclerOptions.Builder<Item>()
