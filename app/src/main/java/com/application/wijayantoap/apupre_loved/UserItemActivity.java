@@ -128,6 +128,11 @@ public class UserItemActivity extends AppCompatActivity {
             }
 
             @Override
+            public Item getItem(int position) {
+                return super.getItem(getItemCount() - 1 - position);
+            }
+
+            @Override
             protected void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position, @NonNull Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());

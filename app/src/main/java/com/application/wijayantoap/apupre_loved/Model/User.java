@@ -3,9 +3,9 @@ package com.application.wijayantoap.apupre_loved.Model;
 public class User {
     private String Email;
     private String Password;
-    private int Report;
+    private String Report;
     private String Status;
-    private int Item;
+    private String Item;
 
     public User() {
 
@@ -15,7 +15,7 @@ public class User {
         Email = email;
     }
 
-    public User(String email, String password, int report, String status, int item) {
+    public User(String email, String password, String report, String status, String item) {
         Email = email;
         Password = password;
         Report = report;
@@ -23,11 +23,11 @@ public class User {
         Item = item;
     }
 
-    public int getReport() {
+    public String getReport() {
         return Report;
     }
 
-    public void setReport(int report) {
+    public void setReport(String report) {
         Report = report;
     }
 
@@ -56,11 +56,11 @@ public class User {
     }
 
 
-    public int getItem() {
+    public String getItem() {
         return Item;
     }
 
-    public void setItem(int item) {
+    public void setItem(String item) {
         Item = item;
     }
 }

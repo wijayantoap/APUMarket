@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
     tools:context=".AdminUserFragment">
 
     <RelativeLayout
@@ -33,31 +34,10 @@
             android:layout_height="match_parent"
             android:layout_below="@id/cardViewSearch">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewUser"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-                <include layout="@layout/user_item"></include>
-
-
-            </LinearLayout>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
         </ScrollView>
 

@@ -124,8 +124,8 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.child(username).getValue(User.class);
 
                 String email = user.getEmail();
-                int report = user.getReport();
-                int item = user.getItem();
+                String report = user.getReport();
+                String item = user.getItem();
 
                 txtEmail.setText(email);
                 txtReport.setText(String.valueOf(report));

@@ -72,7 +72,9 @@ public class ReportActivity extends AppCompatActivity {
                 final String emailVerif = textEmail.getText().toString();
                 final String titleVerif = textTitle.getText().toString();
                 final String messageVerif = textReport.getText().toString();
-                if (emailVerif != "" && titleVerif != "" && messageVerif != "") {
+                if (emailVerif.matches("") || titleVerif.matches("") || messageVerif.matches("")) {
+                    Toast.makeText(ReportActivity.this, "Please fill all the form", Toast.LENGTH_SHORT).show();
+                } else {
                     final ProgressDialog mDialog = new ProgressDialog(ReportActivity.this);
                     mDialog.setMessage("Loading.. Please wait");
                     mDialog.show();
@@ -93,8 +95,6 @@ public class ReportActivity extends AppCompatActivity {
                     });
                     Toast.makeText(ReportActivity.this, "Submitted", Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
-                    Toast.makeText(ReportActivity.this, "Please fill all the form", Toast.LENGTH_SHORT).show();
                 }
             }
         });

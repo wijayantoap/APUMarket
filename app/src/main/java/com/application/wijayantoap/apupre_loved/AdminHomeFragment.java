@@ -19,10 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import static android.widget.LinearLayout.VERTICAL;
+
 public class AdminHomeFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -51,7 +53,8 @@ public class AdminHomeFragment extends Fragment {
 
         // load activity
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewActivity);
-        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         loadActivity();
 
