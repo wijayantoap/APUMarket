@@ -1,5 +1,7 @@
 package com.application.wijayantoap.apupre_loved;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -12,13 +14,25 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.wijayantoap.apupre_loved.Model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private HomeFragment fragmentHome;
     private AddItemFragment fragmentAdd;
     private ProfileFragment fragmentProfile;
+
+    FirebaseDatabase database;
+    DatabaseReference table_user;
+
+    String username;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -46,6 +60,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("userInfo", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
+        database = FirebaseDatabase.getInstance();
+        table_user = database.getReference("User");
+
+
+        table_user.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(username).getValue(User.class);
+                if (user.getStatus().equals("inactive")) {
+
+                    Toast.makeText(MainActivity.this, "Your account has been blocked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    logout();
+                    startActivity(intent);
+                    finish();
+                }
+
+                }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -94,5 +137,13 @@ public class MainActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    public void logout() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("userInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("username", "");
+        editor.apply();
     }
 }

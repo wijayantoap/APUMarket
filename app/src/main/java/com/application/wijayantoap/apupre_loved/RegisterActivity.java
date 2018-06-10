@@ -172,7 +172,5 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("username", editUsername.getText().toString());
         editor.putString("password", editPassword.getText().toString());
         editor.apply();
-
-        Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
     }
 }

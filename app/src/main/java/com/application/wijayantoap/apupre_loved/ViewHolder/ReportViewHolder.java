@@ -2,6 +2,7 @@ package com.application.wijayantoap.apupre_loved.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -15,16 +16,18 @@ public class ReportViewHolder extends RecyclerView.ViewHolder implements View.On
     public ToggleButton toggleButton;
     public RelativeLayout rootLayout;
     private ItemClickListener itemClickListener;
+    public Button btnEmail;
 
     public ReportViewHolder(View itemView) {
         super(itemView);
 
-        textTitle = (TextView) itemView.findViewById(R.id.textTitle);
-        textReport = (TextView) itemView.findViewById(R.id.textReport);
-        textEmail = (TextView) itemView.findViewById(R.id.textEmail);
-        textDate = (TextView) itemView.findViewById(R.id.textDate);
-        toggleButton = (ToggleButton) itemView.findViewById(R.id.toggleButton);
-        rootLayout = (RelativeLayout) itemView.findViewById(R.id.rootLayout);
+        textTitle = itemView.findViewById(R.id.textTitle);
+        textReport = itemView.findViewById(R.id.textReport);
+        textEmail = itemView.findViewById(R.id.textEmail);
+        textDate = itemView.findViewById(R.id.textDate);
+        toggleButton = itemView.findViewById(R.id.toggleButton);
+        rootLayout = itemView.findViewById(R.id.rootLayout);
+        btnEmail = itemView.findViewById(R.id.btnReply);
         itemView.setOnClickListener(this);
     }
 

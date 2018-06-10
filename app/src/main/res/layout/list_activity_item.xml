@@ -89,8 +89,7 @@
                 android:layout_marginTop="5dp"
                 android:text="THE ACTIVITY"
                 android:textSize="@dimen/text_normal"
-                android:textColor="@color/colorGray"
-                android:background="@color/colorGrayLight"/>
+                android:textColor="@color/colorGray"/>
 
         </RelativeLayout>
 

@@ -130,7 +130,5 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.putString("username", editUsername.getText().toString());
         editor.apply();
-
-        Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
     }
 }

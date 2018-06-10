@@ -13,7 +13,7 @@
             android:id="@+id/layoutText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -38,13 +38,17 @@
                 android:text="Status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_big" />
+                android:textSize="@dimen/text_big"
+                android:layout_marginTop="3dp"
+                />
 
             <TextView
                 android:text="Item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_big" />
+                android:textSize="@dimen/text_big"
+                android:layout_marginTop="3dp"
+                />
 
 
         </LinearLayout>
@@ -53,7 +57,6 @@
             android:id="@+id/layoutFromDB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:orientation="vertical"
             android:layout_toRightOf="@+id/layoutText"
             android:layout_marginLeft="10dp">
@@ -86,6 +89,7 @@
                 android:id="@+id/textItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:textSize="@dimen/text_big" />
 
         </LinearLayout>

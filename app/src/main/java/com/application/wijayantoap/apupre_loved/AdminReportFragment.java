@@ -136,9 +136,20 @@ public class AdminReportFragment extends Fragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if(isChecked) {
                             holder.textReport.setVisibility(VISIBLE);
+                            holder.btnEmail.setVisibility(VISIBLE);
                         } else {
                             holder.textReport.setVisibility(View.GONE);
+                            holder.btnEmail.setVisibility(View.GONE);
                         }
+                    }
+                });
+                holder.btnEmail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Uri data = Uri.parse("mailto:" + holder.textEmail.getText().toString() + "?subject=" + "RE: " + holder.textTitle.getText().toString() + "&body=" + "");
+                        intent.setData(data);
+                        startActivity(intent);
                     }
                 });
             }

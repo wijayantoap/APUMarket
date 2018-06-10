@@ -31,7 +31,8 @@
         android:text="TP038091"
         android:textColor="@color/colorGray"
         android:textSize="@dimen/text_big"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:inputType="textEmailAddress"/>
 
     <TextView
         android:id="@+id/textDate"
@@ -70,10 +71,24 @@
         android:textSize="@dimen/text_normal"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:layout_below="@id/textReport"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="Reply"
+        android:textColor="@color/colorGray"
+        android:drawableLeft="@drawable/ic_mail"
+        android:background="@color/colorWhite"
+        android:visibility="gone"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/textReport"
+        android:layout_below="@id/btnReply"
         android:layout_marginTop="10dp"
         android:background="@color/colorGrayLight"></View>
 

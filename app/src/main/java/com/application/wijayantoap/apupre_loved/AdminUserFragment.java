@@ -205,7 +205,7 @@ public class AdminUserFragment extends Fragment {
     private void showUpdateDialog(final String key, final User user) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("Edit");
-        alertDialog.setMessage("Please fill the information");
+        alertDialog.setMessage("User information");
 
         LayoutInflater inflater = this.getLayoutInflater();
         View edit_item_layout = inflater.inflate(R.layout.edit_user_layout, null);
@@ -218,8 +218,8 @@ public class AdminUserFragment extends Fragment {
 
         textUsername.setText(key);
         textEmail.setText(user.getEmail());
-        //textReport.setText(String.valueOf(user.getReport()));
-        //textItem.setText(String.valueOf(user.getItem()));
+        textReport.setText(String.valueOf(user.getReport()));
+        textItem.setText(String.valueOf(user.getItem()));
 
         alertDialog.setView(edit_item_layout);
         alertDialog.setIcon(R.drawable.ic_edit);
