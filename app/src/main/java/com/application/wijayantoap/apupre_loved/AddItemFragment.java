@@ -22,10 +22,14 @@ import android.widget.Toast;
 
 import com.application.wijayantoap.apupre_loved.Model.Activity;
 import com.application.wijayantoap.apupre_loved.Model.Item;
+import com.application.wijayantoap.apupre_loved.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -60,7 +64,7 @@ public class AddItemFragment extends Fragment {
     String username;
     StepperTouch stepperTouch;
 
-    DatabaseReference table_activity;
+    DatabaseReference table_activity, table_user;
     DateFormat df = new SimpleDateFormat("dd MMM yyyy");
     final String date = df.format(Calendar.getInstance().getTime());
 
@@ -84,6 +88,8 @@ public class AddItemFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         table_activity = database.getReference("Activity");
+        table_user = database.getReference("User");
+
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userInfo", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
@@ -137,6 +143,7 @@ public class AddItemFragment extends Fragment {
                         items.push().setValue(newItem);
                         Activity activity = new Activity(username, "Uploaded an item with the title " + validateTitle, date);
                         table_activity.push().setValue(activity);
+                        updateItem();
                         Intent intent = new Intent(getActivity(), UserItemActivity.class);
                         intent.putExtra("usernameExtra", username);
                         startActivity(intent);
@@ -144,6 +151,22 @@ public class AddItemFragment extends Fragment {
                     }
 
                 }
+            }
+        });
+    }
+
+    private void updateItem() {
+        table_user.child(username).child("item").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int item = dataSnapshot.getValue(int.class);
+                item = item+1;
+                dataSnapshot.getRef().setValue(item);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }

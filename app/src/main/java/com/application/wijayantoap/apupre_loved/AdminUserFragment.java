@@ -218,8 +218,8 @@ public class AdminUserFragment extends Fragment {
 
         textUsername.setText(key);
         textEmail.setText(user.getEmail());
-        textReport.setText(user.getReport());
-        textItem.setText(user.getItem());
+        //textReport.setText(String.valueOf(user.getReport()));
+        //textItem.setText(String.valueOf(user.getItem()));
 
         alertDialog.setView(edit_item_layout);
         alertDialog.setIcon(R.drawable.ic_edit);

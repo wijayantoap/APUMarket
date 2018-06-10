@@ -52,8 +52,6 @@ public class ReportActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("dd MMM yyyy");
         final String date = df.format(Calendar.getInstance().getTime());
 
-        Toast.makeText(this, "" + date, Toast.LENGTH_SHORT).show();
-
         textTitle = findViewById(R.id.editTitle);
         textEmail = findViewById(R.id.editEmail);
         textReport = findViewById(R.id.editMessage);

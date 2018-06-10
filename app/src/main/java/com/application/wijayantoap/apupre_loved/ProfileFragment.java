@@ -50,7 +50,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class ProfileFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     String username;
 
@@ -124,8 +124,8 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.child(username).getValue(User.class);
 
                 String email = user.getEmail();
-                String report = user.getReport();
-                String item = user.getItem();
+                int report = user.getReport();
+                int item = user.getItem();
 
                 txtEmail.setText(email);
                 txtReport.setText(String.valueOf(report));
@@ -138,8 +138,9 @@ public class ProfileFragment extends Fragment {
             }
         });
         // load activity
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewProfileActivity);
-        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView = view.findViewById(R.id.recyclerViewProfileActivity);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         loadActivity(username);
         return view;
