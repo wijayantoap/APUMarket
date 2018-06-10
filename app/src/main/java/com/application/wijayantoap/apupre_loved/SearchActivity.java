@@ -1,5 +1,6 @@
 package com.application.wijayantoap.apupre_loved;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -111,7 +112,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull Item model) {
+            protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
                 holder.itemPrice.setText(model.getPrice());
@@ -122,6 +123,14 @@ public class SearchActivity extends AppCompatActivity {
                 Picasso.with(getBaseContext()).load(model.getPicture())
                         .into(holder.itemImage);
                 final Item clickItem = model;
+                holder.itemImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent= new Intent(SearchActivity.this, ImageActivity.class);
+                        intent.putExtra("image_url", model.getPicture().toString());
+                        startActivity(intent);
+                    }
+                });
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {

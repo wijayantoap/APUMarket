@@ -53,8 +53,11 @@
             android:name=".SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ReportActivity"
+        <activity
+            android:name=".ReportActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ImageActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

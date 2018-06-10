@@ -1,6 +1,7 @@
 package com.application.wijayantoap.apupre_loved;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -116,7 +117,7 @@ public class AdminItemFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull Item model) {
+            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull final Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
                 holder.itemPrice.setText(model.getPrice());
@@ -127,6 +128,14 @@ public class AdminItemFragment extends Fragment {
                 Picasso.with(getActivity()).load(model.getPicture())
                         .into(holder.itemImage);
                 final Item clickItem = model;
+                holder.itemImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent= new Intent(getContext(), ImageActivity.class);
+                        intent.putExtra("image_url", model.getPicture().toString());
+                        startActivity(intent);
+                    }
+                });
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {

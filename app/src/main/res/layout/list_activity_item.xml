@@ -15,6 +15,7 @@
 
 
     <ImageView
+        android:id="@+id/imgDot"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginLeft="26dp"
@@ -29,6 +30,7 @@
         android:layout_toRightOf="@+id/viewVertical"
         android:layout_marginLeft="@dimen/list_activity_margin_big"
         app:cardCornerRadius="2dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -36,37 +38,59 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/list_activity_margin_big">
 
-            <TextView
-                android:id="@+id/textUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="USERNAME"
-                android:textSize="@dimen/text_normal"
-                android:textStyle="bold"
+            <ImageView
+                android:id="@+id/imgUser"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="@dimen/list_activity_margin_big"
                 android:layout_marginLeft="@dimen/list_activity_margin_big"
                 android:layout_marginRight="@dimen/list_activity_margin_normal"
-                android:textColor="@color/colorAccent"/>
+                android:src="@drawable/circle_logo_gray"/>
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imgUser"
+                android:layout_marginTop="@dimen/list_activity_margin_big"
+                android:layout_marginLeft="@dimen/list_activity_margin_big"
+                android:layout_marginRight="@dimen/list_activity_margin_normal"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USERNAME"
+                    android:textSize="@dimen/text_normal"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:id="@+id/textActivityDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DATE"
+                    android:textSize="10sp"
+                    android:layout_below="@id/textUsername"
+                    android:textColor="@color/colorGray"/>
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/textUsername"
-                android:layout_marginTop="20dp"
+                android:layout_below="@id/layout1"
+                android:layout_marginLeft="@dimen/list_activity_margin_big"
+                android:layout_toRightOf="@id/imgUser"
+                android:layout_marginTop="5dp"
                 android:text="THE ACTIVITY"
                 android:textSize="@dimen/text_normal"
-                android:textColor="@color/colorGray"/>
-
-            <TextView
-                android:id="@+id/textActivityDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DATE"
-                android:textSize="@dimen/text_normal"
-                android:layout_marginLeft="@dimen/list_activity_margin_big"
-                android:layout_below="@id/textUsername"
-                android:textColor="@color/colorGray"/>
+                android:textColor="@color/colorGray"
+                android:background="@color/colorGrayLight"/>
 
         </RelativeLayout>
 

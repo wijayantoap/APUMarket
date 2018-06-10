@@ -2,7 +2,6 @@ package com.application.wijayantoap.apupre_loved.Model;
 
 public class Item {
     private String Name, Username, Description, Price, Picture, Quality, Phone , Date, CategoryId;
-
     public Item(){
 
     }
@@ -90,4 +89,5 @@ public class Item {
     public void setCategoryId(String categoryId) {
         CategoryId = categoryId;
     }
+
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.application.wijayantoap.apupre_loved.Model.Activity;
 import com.application.wijayantoap.apupre_loved.ViewHolder.UserActivityViewHolder;
@@ -25,7 +26,6 @@ public class AdminHomeFragment extends Fragment {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference table_activity = database.getReference("Activity");
@@ -100,6 +100,11 @@ public class AdminHomeFragment extends Fragment {
                 holder.textDetails.setText(model.getDetails());
                 holder.textDate.setText(model.getDate());
                 holder.textUsername.setText(model.getUsername());
+                /*
+                if (holder.textDetails.getText().toString().contains("block")) {
+                    holder.imgDotActivity.setImageResource(R.drawable.ic_red_dot);
+                }
+                */
             }
 
             @Override

@@ -34,7 +34,7 @@ import static android.view.View.VISIBLE;
 public class AdminReportFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference reportList;
@@ -65,8 +65,9 @@ public class AdminReportFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reportList = database.getReference("Report");
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewReport);
-        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView = view.findViewById(R.id.recyclerViewReport);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
         loadReport();

@@ -148,6 +148,10 @@ public class AddItemFragment extends Fragment {
                         intent.putExtra("usernameExtra", username);
                         startActivity(intent);
                         loadFragment();
+                        newItem = null;
+                        saveUri = null;
+                    } else {
+                        Toast.makeText(getContext(), "Please upload an image", Toast.LENGTH_SHORT).show();
                     }
 
                 }

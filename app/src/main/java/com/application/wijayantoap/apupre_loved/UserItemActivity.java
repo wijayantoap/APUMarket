@@ -57,7 +57,7 @@ public class UserItemActivity extends AppCompatActivity {
     ImageView imageView;
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     RelativeLayout rootLayout;
 
@@ -103,7 +103,8 @@ public class UserItemActivity extends AppCompatActivity {
 
         rootLayout = findViewById(R.id.rootLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItemUser);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
         // get intent
@@ -115,7 +116,7 @@ public class UserItemActivity extends AppCompatActivity {
         }
     }
 
-    private void loadListItem(String categoryId) {
+    private void loadListItem(String usernameExtra) {
         Query query = itemList.orderByChild("username").equalTo(usernameExtra);
 
         FirebaseRecyclerOptions<Item> options =
@@ -200,6 +201,7 @@ public class UserItemActivity extends AppCompatActivity {
         Activity activity = new Activity(username, "Item deleted", date);
         table_activity.push().setValue(activity);
         Snackbar.make(rootLayout, "Item deleted", Snackbar.LENGTH_SHORT).show();
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -266,6 +268,7 @@ public class UserItemActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -341,6 +344,9 @@ public class UserItemActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int item = dataSnapshot.getValue(int.class);
                 item = item-1;
+                if (item<0) {
+                    item = 0;
+                }
                 dataSnapshot.getRef().setValue(item);
             }
 
