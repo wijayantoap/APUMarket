@@ -270,7 +270,7 @@ public class AddItemFragment extends Fragment {
                                     // set value for newItem if image upload and get download link
                                     newItem = new Item(editTitle.getText().toString(),username,
                                             editDescription.getText().toString(), editPrice.getText().toString(), uri.toString(), quality,
-                                            "+60" +editPhone.getText().toString(), date, category);
+                                            "+60" +editPhone.getText().toString(), date, category, 0);
                                 }
                             });
                         }

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
 import com.application.wijayantoap.apupre_loved.Model.Item;
+import com.application.wijayantoap.apupre_loved.ViewHolder.AdminItemViewHolder;
 import com.application.wijayantoap.apupre_loved.ViewHolder.ItemViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -107,17 +108,17 @@ public class AdminItemFragment extends Fragment {
                 new FirebaseRecyclerOptions.Builder<Item>()
                         .setQuery(query, Item.class)
                         .build();
-        adapter = new FirebaseRecyclerAdapter<Item, ItemViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Item, AdminItemViewHolder>(options) {
             @Override
-            public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public AdminItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.admin_product_item, parent, false);
 
-                return new ItemViewHolder(view);
+                return new AdminItemViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull final Item model) {
+            protected void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position, @NonNull final Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
                 holder.itemPrice.setText(model.getPrice());
@@ -125,6 +126,7 @@ public class AdminItemFragment extends Fragment {
                 holder.itemPhone.setText(model.getPhone());
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
+                holder.itemViewer.setText(String.valueOf(model.getView()));
                 Picasso.with(getActivity()).load(model.getPicture())
                         .into(holder.itemImage);
                 final Item clickItem = model;

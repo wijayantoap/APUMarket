@@ -209,15 +209,14 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginRight="3dp"
-                android:background="@drawable/ic_edit" />
+                android:background="@drawable/ic_view" />
 
             <TextView
-                android:id="@+id/textEdit"
+                android:id="@+id/textViewer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewLine"
-                android:autoLink="phone"
-                android:text="Long press to edit"
+                android:text=""
                 android:textSize="@dimen/text_normal"
                 android:textStyle="bold"/>
 

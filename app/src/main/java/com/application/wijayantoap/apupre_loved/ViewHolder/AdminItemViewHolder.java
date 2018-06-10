@@ -11,7 +11,7 @@ import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
 import com.application.wijayantoap.apupre_loved.R;
 
 public class AdminItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
-    public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, itemDate, itemQuality;
+    public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, itemDate, itemQuality, itemViewer;
     public ImageView itemImage;
 
     private ItemClickListener itemClickListener;
@@ -23,14 +23,15 @@ public class AdminItemViewHolder extends RecyclerView.ViewHolder implements View
     public AdminItemViewHolder(View itemView) {
         super(itemView);
 
-        itemTitle = (TextView) itemView.findViewById(R.id.textTitle);
-        itemPrice = (TextView) itemView.findViewById(R.id.textPrice);
-        itemUsername = (TextView) itemView.findViewById(R.id.textUsername);
-        itemDescription = (TextView) itemView.findViewById(R.id.textDescription);
-        itemPhone = (TextView) itemView.findViewById(R.id.textPhone);
-        itemDate = (TextView) itemView.findViewById(R.id.textDate);
-        itemImage = (ImageView) itemView.findViewById(R.id.imgItem);
-        itemQuality = (TextView) itemView.findViewById(R.id.textQuality);
+        itemTitle = itemView.findViewById(R.id.textTitle);
+        itemPrice = itemView.findViewById(R.id.textPrice);
+        itemUsername = itemView.findViewById(R.id.textUsername);
+        itemDescription = itemView.findViewById(R.id.textDescription);
+        itemPhone = itemView.findViewById(R.id.textPhone);
+        itemDate = itemView.findViewById(R.id.textDate);
+        itemImage = itemView.findViewById(R.id.imgItem);
+        itemQuality = itemView.findViewById(R.id.textQuality);
+        itemViewer = itemView.findViewById(R.id.textViewer);
 
         itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);

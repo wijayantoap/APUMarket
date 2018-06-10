@@ -146,6 +146,7 @@ public class UserItemActivity extends AppCompatActivity {
                 holder.itemPhone.setText(model.getPhone());
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
+                holder.itemViewer.setText(String.valueOf(model.getView()));
                 Picasso.with(getBaseContext()).load(model.getPicture())
                         .into(holder.itemImage);
                 final Item clickItem = model;
@@ -252,7 +253,7 @@ public class UserItemActivity extends AppCompatActivity {
                 newItem = new Item(editTitle.getText().toString(), username,
                         editDescription.getText().toString(), editPrice.getText().toString(),
                         txtImgPath.getText().toString(), editQuality.getText().toString(),
-                        editPhone.getText().toString(), date, category);
+                        editPhone.getText().toString(), date, category, 0);
 
                 itemList.child(key).setValue(newItem);
                 Snackbar.make(rootLayout, "Item edited", Snackbar.LENGTH_SHORT).show();
@@ -343,8 +344,8 @@ public class UserItemActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int item = dataSnapshot.getValue(int.class);
-                item = item-1;
-                if (item<0) {
+                item = item - 1;
+                if (item < 0) {
                     item = 0;
                 }
                 dataSnapshot.getRef().setValue(item);

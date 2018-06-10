@@ -2,11 +2,13 @@ package com.application.wijayantoap.apupre_loved.Model;
 
 public class Item {
     private String Name, Username, Description, Price, Picture, Quality, Phone , Date, CategoryId;
+    private int View;
+
     public Item(){
 
     }
 
-    public Item(String name, String username, String description, String price, String picture, String quality, String phone, String date, String categoryId) {
+    public Item(String name, String username, String description, String price, String picture, String quality, String phone, String date, String categoryId, int view) {
         Name = name;
         Username = username;
         Description = description;
@@ -16,6 +18,7 @@ public class Item {
         Phone = phone;
         Date = date;
         CategoryId = categoryId;
+        View = view;
     }
 
     public String getName() {
@@ -90,4 +93,11 @@ public class Item {
         CategoryId = categoryId;
     }
 
+    public int getView() {
+        return View;
+    }
+
+    public void setView(int view) {
+        View = view;
+    }
 }

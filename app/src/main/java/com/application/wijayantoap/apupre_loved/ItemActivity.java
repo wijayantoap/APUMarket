@@ -24,9 +24,12 @@ import com.application.wijayantoap.apupre_loved.ViewHolder.CategoryViewHolder;
 import com.application.wijayantoap.apupre_loved.ViewHolder.ItemViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class ItemActivity extends AppCompatActivity {
@@ -128,6 +131,9 @@ public class ItemActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull final Item model) {
+                final DatabaseReference dbRef = getRef(position);
+                final String postKey = dbRef.getKey();
+
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
                 holder.itemPrice.setText(model.getPrice());
@@ -141,6 +147,20 @@ public class ItemActivity extends AppCompatActivity {
                 holder.itemImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        itemList.child(postKey).child("view").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                int item = dataSnapshot.getValue(int.class);
+                                item = item + 1;
+                                dataSnapshot.getRef().setValue(item);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         Intent intent= new Intent(ItemActivity.this, ImageActivity.class);
                         intent.putExtra("image_url", model.getPicture().toString());
                         startActivity(intent);
