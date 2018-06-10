@@ -34,9 +34,12 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -68,7 +71,7 @@ public class UserItemActivity extends AppCompatActivity {
     Button btnChoose, btnUpload, btnSubmit;
 
     FirebaseRecyclerAdapter adapter;
-    DatabaseReference table_activity;
+    DatabaseReference table_activity, table_user;
 
     Uri saveUri;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -96,6 +99,7 @@ public class UserItemActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         table_activity = database.getReference("Activity");
+        table_user = database.getReference("User");
 
         rootLayout = findViewById(R.id.rootLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItemUser);
@@ -182,6 +186,7 @@ public class UserItemActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             deleteItem(adapter.getRef(item.getOrder()).getKey());
+                            updateItem();
                         }
                     })
                     .setNegativeButton("No", null)
@@ -328,5 +333,21 @@ public class UserItemActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void updateItem() {
+        table_user.child(username).child("item").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int item = dataSnapshot.getValue(int.class);
+                item = item-1;
+                dataSnapshot.getRef().setValue(item);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
