@@ -10,9 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.application.wijayantoap.apupre_loved.Model.Activity;
+import com.application.wijayantoap.apupre_loved.Model.Flag;
+import com.application.wijayantoap.apupre_loved.ViewHolder.FlagViewHolder;
 import com.application.wijayantoap.apupre_loved.ViewHolder.UserActivityViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,23 +21,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import static android.widget.LinearLayout.VERTICAL;
 
-public class AdminHomeFragment extends Fragment {
+public class AdminFlagFragment extends Fragment {
+    private OnFragmentInteractionListener mListener;
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference table_activity = database.getReference("Activity");
+    final DatabaseReference table_flag = database.getReference("Flag");
     FirebaseRecyclerAdapter adapter;
 
-    public AdminHomeFragment() {
+    public AdminFlagFragment() {
         // Required empty public constructor
     }
 
-    public static AdminHomeFragment newInstance(String param1, String param2) {
-        AdminHomeFragment fragment = new AdminHomeFragment();
+    public static AdminFlagFragment newInstance(String param1, String param2) {
+        AdminFlagFragment fragment = new AdminFlagFragment();
         return fragment;
     }
 
@@ -49,16 +50,41 @@ public class AdminHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_admin_home, container, false);
+        View view =  inflater.inflate(R.layout.fragment_admin_flag, container, false);
 
-        // load recyclerview
-        recyclerView = view.findViewById(R.id.recyclerViewActivity);
+        recyclerView = view.findViewById(R.id.recyclerViewFlag);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         loadActivity();
 
-        return  view;
+        return view;
+    }
+
+    private void loadActivity() {
+        Query query = table_flag;
+
+        FirebaseRecyclerOptions<Flag> options =
+                new FirebaseRecyclerOptions.Builder<Flag>()
+                        .setQuery(query, Flag.class)
+                        .build();
+        adapter = new FirebaseRecyclerAdapter<Flag, FlagViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull FlagViewHolder holder, int position, @NonNull Flag model) {
+                holder.textTitle.setText(model.getTitle());
+                holder.textDate.setText(model.getDate());
+                holder.textUsername.setText(model.getUsername());
+            }
+
+            @Override
+            public FlagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.flag_item, parent, false);
+
+                return new FlagViewHolder(view);
+            }
+        };
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -66,11 +92,15 @@ public class AdminHomeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-        } else {
-            
+            mListener = (OnFragmentInteractionListener) context;
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -85,37 +115,6 @@ public class AdminHomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private void loadActivity() {
-        Query query = table_activity;
-
-        FirebaseRecyclerOptions<Activity> options =
-                new FirebaseRecyclerOptions.Builder<Activity>()
-                        .setQuery(query, Activity.class)
-                        .build();
-        adapter = new FirebaseRecyclerAdapter<Activity, UserActivityViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull UserActivityViewHolder holder, int position, @NonNull Activity model) {
-                holder.textDetails.setText(model.getDetails());
-                holder.textDate.setText(model.getDate());
-                holder.textUsername.setText(model.getUsername());
-                /*
-                if (holder.textDetails.getText().toString().contains("block")) {
-                    holder.imgDotActivity.setImageResource(R.drawable.ic_red_dot);
-                }
-                */
-            }
-
-            @Override
-            public UserActivityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_activity_item, parent, false);
-
-                return new UserActivityViewHolder(view);
-            }
-        };
-        recyclerView.setAdapter(adapter);
     }
 
     @Override

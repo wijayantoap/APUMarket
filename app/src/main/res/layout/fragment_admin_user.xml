@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_find"
                 android:drawablePadding="10dp"
-                android:hint="Search"
+                android:hint="Search by email"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1" />

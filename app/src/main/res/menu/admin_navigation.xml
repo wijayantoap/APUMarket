@@ -12,6 +12,11 @@
         android:title="@string/title_message" />
 
     <item
+        android:id="@+id/navigation_flag"
+        android:icon="@drawable/ic_flag"
+        android:title="@string/title_flag" />
+
+    <item
         android:id="@+id/navigation_list"
         android:icon="@drawable/ic_list"
         android:title="@string/title_list" />

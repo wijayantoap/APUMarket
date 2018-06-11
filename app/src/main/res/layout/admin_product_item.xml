@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textCurrency"
-            android:text="@string/currencty"
+            android:text="@string/currency"
             android:textSize="@dimen/text_normal"
             android:layout_below="@id/textTitle"
             android:layout_marginLeft="@dimen/product_item_margin"

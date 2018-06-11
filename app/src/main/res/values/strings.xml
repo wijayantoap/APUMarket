@@ -28,6 +28,7 @@
     <string name="title_message">Message</string>
     <string name="title_list">List</string>
     <string name="title_user">Users</string>
+    <string name="title_flag">Flag</string>
     <string name="title_admin">Welcome Admin</string>
     <string name="title_activity_report"></string>
 
@@ -35,14 +36,14 @@
 
     <string name="home_greeting">welcome to APU Market</string>
     <string name="search_greeting">what do you want to search?</string>
-    <string name="search_alert">The Firebase database has no equivalent of a SQL LIKE operation. This search provides \'Start With\' functionality with case sensitive</string>
+    <string name="search_alert">The Firebase database has no equivalent of a SQL LIKE operation. This search provides \'Start With\' functionality</string>
 
     <string name="title_add_item">What will you sell?</string>
     <string name="category">Category</string>
     <string name="quality_question"><b>Quality?</b> Swipe: 1 (low) - 5 (high)</string>
     <string name="image_upload">Upload an image</string>
 
-    <string name="currencty">RM</string>
+    <string name="currency">RM</string>
 
     <string name="country_code">+60</string>
     <string name="title_activity_admin">AdminActivity</string>

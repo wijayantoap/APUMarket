@@ -253,7 +253,7 @@ public class UserItemActivity extends AppCompatActivity {
                 newItem = new Item(editTitle.getText().toString(), username,
                         editDescription.getText().toString(), editPrice.getText().toString(),
                         txtImgPath.getText().toString(), editQuality.getText().toString(),
-                        editPhone.getText().toString(), date, category, 0);
+                        editPhone.getText().toString(), date, category, 0, editTitle.getText().toString().toLowerCase());
 
                 itemList.child(key).setValue(newItem);
                 Snackbar.make(rootLayout, "Item edited", Snackbar.LENGTH_SHORT).show();

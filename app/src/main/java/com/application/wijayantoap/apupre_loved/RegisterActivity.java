@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editEmail, editUsername, editPassword, editPasswordConfirmation;
     CardView cardViewRegister;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
         final DatabaseReference table_activity = database.getReference("Activity");
+        final DatabaseReference table_auction = database.getReference("Auction");
+
 
         cardViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                             Activity activity = new Activity(validateUsername, "Registered to APU Market", date);
                                             table_activity.push().setValue(activity);
+                                            table_auction.child(validateUsername).child("owner").setValue(validateUsername);
                                             saveInfo();
                                             startActivity(i);
                                             finish();
@@ -170,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("username", editUsername.getText().toString());
-        editor.putString("password", editPassword.getText().toString());
+        editor.putString("search", "yes");
         editor.apply();
     }
 }

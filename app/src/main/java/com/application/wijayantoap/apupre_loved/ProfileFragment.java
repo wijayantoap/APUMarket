@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment {
     String username;
 
     TextView textViewUser, txtEmail, txtReport, txtItem;
-    CardView cardViewProduct;
+    CardView cardViewProduct, cardViewAuction;
     RelativeLayout layoutReport;
 
     private OnFragmentInteractionListener mListener;
@@ -92,7 +92,6 @@ public class ProfileFragment extends Fragment {
 
         textViewUser = view.findViewById(R.id.textUser);
         txtEmail = view.findViewById(R.id.textEmail);
-        txtReport = view.findViewById(R.id.textReports);
         txtItem = view.findViewById(R.id.textItems);
 
         cardViewProduct = view.findViewById(R.id.cardViewProduct);
@@ -102,6 +101,15 @@ public class ProfileFragment extends Fragment {
                 // get user and send to new activity
                 Intent intent = new Intent(getActivity(), UserItemActivity.class);
                 intent.putExtra("usernameExtra", textViewUser.getText());
+                startActivity(intent);
+            }
+        });
+
+        cardViewAuction = view.findViewById(R.id.cardViewAuction);
+        cardViewAuction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AuctionActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,12 +132,10 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.child(username).getValue(User.class);
 
                 String email = user.getEmail();
-                int report = user.getReport();
                 int item = user.getItem();
 
                 txtEmail.setText(email);
-                txtReport.setText(String.valueOf(report));
-                txtItem.setText(String.valueOf(item));
+                txtItem.setText(String.valueOf(item) + " Items");
             }
 
             @Override
@@ -246,6 +252,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         adapter.stopListening();
     }
 }

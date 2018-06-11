@@ -8,9 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
 import com.application.wijayantoap.apupre_loved.Model.Item;
@@ -36,6 +40,8 @@ public class AdminItemFragment extends Fragment {
 
     FirebaseRecyclerAdapter adapter;
 
+    EditText editFind;
+    String currentSearch = "";
 
     public AdminItemFragment() {
         // Required empty public constructor
@@ -64,7 +70,20 @@ public class AdminItemFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        loadListItem();
+        editFind = view.findViewById(R.id.editFind);
+        editFind.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    currentSearch = editFind.getText().toString().toLowerCase();
+                    loadListItem(currentSearch);
+                    adapter.startListening();
+                }
+                return true;
+            }
+        });
+
+        loadListItem(currentSearch);
 
 
         return view;
@@ -101,8 +120,8 @@ public class AdminItemFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void loadListItem() {
-        Query query = itemList;
+    private void loadListItem(String currentSearch) {
+        Query query = itemList.orderByChild("toLowerCase").startAt(currentSearch).endAt(currentSearch + "\uf8ff");
 
         FirebaseRecyclerOptions<Item> options =
                 new FirebaseRecyclerOptions.Builder<Item>()

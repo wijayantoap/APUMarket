@@ -1,10 +1,13 @@
 package com.application.wijayantoap.apupre_loved;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
+import com.application.wijayantoap.apupre_loved.Model.Activity;
 import com.application.wijayantoap.apupre_loved.Model.Category;
+import com.application.wijayantoap.apupre_loved.Model.Flag;
 import com.application.wijayantoap.apupre_loved.Model.Item;
 import com.application.wijayantoap.apupre_loved.ViewHolder.CategoryViewHolder;
 import com.application.wijayantoap.apupre_loved.ViewHolder.ItemViewHolder;
@@ -32,17 +37,25 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class ItemActivity extends AppCompatActivity {
 
     ImageView imageView;
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference itemList;
+    DatabaseReference table_flag;
+    DatabaseReference table_activity;
+    DatabaseReference table_auction;
 
     String categoryId = "";
+    String date, username;
 
     FirebaseRecyclerAdapter adapter;
 
@@ -63,13 +76,22 @@ public class ItemActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
+        DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+        date = df.format(Calendar.getInstance().getTime());
+
         // Firebase
         database= FirebaseDatabase.getInstance();
         itemList = database.getReference("Item");
+        table_activity = database.getReference("Activity");
+        table_flag = database.getReference("Flag");
+        table_auction = database.getReference("Auction");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItem);
-        //recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
         ImageView imageBackground = (ImageView) findViewById(R.id.image_id);
@@ -130,7 +152,7 @@ public class ItemActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull final Item model) {
+            protected void onBindViewHolder(@NonNull ItemViewHolder holder, final int position, @NonNull final Item model) {
                 final DatabaseReference dbRef = getRef(position);
                 final String postKey = dbRef.getKey();
 
@@ -143,6 +165,37 @@ public class ItemActivity extends AppCompatActivity {
                 holder.itemQuality.setText(model.getQuality());
                 Picasso.with(getBaseContext()).load(model.getPicture())
                         .into(holder.itemImage);
+                holder.layoutFlag.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final String title = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.textTitle)).getText().toString();
+                        AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(ItemActivity.this);
+                        alertDialog.setTitle("Flag");
+                        alertDialog.setMessage("Flag this post to alert the administrators?");
+                        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Activity activity = new Activity(username, "Flagged " + title, date);
+                                table_activity.push().setValue(activity);
+                                Flag flag = new Flag(username, title, date);
+                                table_flag.push().setValue(flag);
+                                Toast.makeText(ItemActivity.this, "Flagged " + title, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        alertDialog.setNegativeButton("No", null);
+                        alertDialog.show();
+                    }
+                });
+                holder.layoutMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String owner = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.textUsername)).getText().toString();
+                        table_auction.child(owner).child(username).setValue(username);
+                        Intent intent = new Intent(ItemActivity.this, ChatActivity.class);
+                        intent.putExtra("chatId", owner);
+                        startActivity(intent);
+                    }
+                });
                 final Item clickItem = model;
                 holder.itemImage.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -187,6 +240,11 @@ public class ItemActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         adapter.stopListening();
     }
 }

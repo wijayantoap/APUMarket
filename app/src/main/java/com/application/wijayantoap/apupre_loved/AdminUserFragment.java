@@ -11,10 +11,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,6 +65,9 @@ public class AdminUserFragment extends Fragment {
 
     User newUser;
 
+    String currentSearch = "";
+
+    EditText editFind;
     private OnFragmentInteractionListener mListener;
 
     public AdminUserFragment() {
@@ -100,7 +106,20 @@ public class AdminUserFragment extends Fragment {
 
         rootLayout = view.findViewById(R.id.rootLayout);
 
-        loadListUser();
+        loadListUser(currentSearch);
+
+        editFind = view.findViewById(R.id.editFind);
+        editFind.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    currentSearch = editFind.getText().toString();
+                    loadListUser(currentSearch);
+                    adapter.startListening();
+                }
+                return true;
+            }
+        });
 
         return view;
     }
@@ -136,8 +155,8 @@ public class AdminUserFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void loadListUser() {
-        Query query = userList;
+    private void loadListUser(String currentSearch) {
+        Query query = userList.orderByChild("email").startAt(currentSearch).endAt(currentSearch + "\uf8ff");;;
 
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()
@@ -180,6 +199,7 @@ public class AdminUserFragment extends Fragment {
         super.onStop();
         adapter.stopListening();
     }
+
 
     //Update / Delete
 

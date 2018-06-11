@@ -1,14 +1,14 @@
 package com.application.wijayantoap.apupre_loved.Model;
 
 public class Item {
-    private String Name, Username, Description, Price, Picture, Quality, Phone , Date, CategoryId;
+    private String Name, Username, Description, Price, Picture, Quality, Phone , Date, CategoryId, ToLowerCase;
     private int View;
 
     public Item(){
 
     }
 
-    public Item(String name, String username, String description, String price, String picture, String quality, String phone, String date, String categoryId, int view) {
+    public Item(String name, String username, String description, String price, String picture, String quality, String phone, String date, String categoryId, int view, String toLowerCase) {
         Name = name;
         Username = username;
         Description = description;
@@ -19,6 +19,7 @@ public class Item {
         Date = date;
         CategoryId = categoryId;
         View = view;
+        ToLowerCase = toLowerCase;
     }
 
     public String getName() {
@@ -99,5 +100,13 @@ public class Item {
 
     public void setView(int view) {
         View = view;
+    }
+
+    public String getToLowerCase() {
+        return ToLowerCase;
+    }
+
+    public void setToLowerCase(String toLowerCase) {
+        ToLowerCase = toLowerCase;
     }
 }

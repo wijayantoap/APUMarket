@@ -164,7 +164,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        adapter.stopListening();
     }
 
     @Override
@@ -174,9 +173,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        adapter.startListening();
+    public void onDestroy() {
+        super.onDestroy();
+        adapter.stopListening();
     }
 
     @Override
@@ -189,8 +188,6 @@ public class HomeFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        } else {
-            //Toast.makeText(context, "Home Fragment Attached", Toast.LENGTH_SHORT).show();
         }
     }
 

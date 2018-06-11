@@ -22,12 +22,26 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textEmail"
+        android:id="@+id/textFlag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textTitle"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp"
+        android:text="flagged by"
+        android:textColor="@color/colorGray"
+        android:textSize="@dimen/text_big"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textTitle"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/textFlag"
         android:text="TP038091"
         android:textColor="@color/colorGray"
         android:textSize="@dimen/text_big"
@@ -46,50 +60,20 @@
         android:textSize="@dimen/text_big"
         android:textStyle="bold" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/textDate"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/check_report"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textOff=""
-        android:textOn="" />
-
-    <TextView
-        android:id="@+id/textReport"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textEmail"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Description"
-        android:textSize="@dimen/text_normal"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btnReply"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:padding="10dp"
-        android:layout_below="@id/textReport"
+        android:src="@drawable/ic_flag"
+        android:layout_below="@id/textDate"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:text="Reply"
-        android:textColor="@color/colorGray"
-        android:drawableLeft="@drawable/ic_mail"
-        android:background="@color/colorWhite"
-        android:visibility="gone"/>
+        />
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/btnReply"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/textFlag"
         android:background="@color/colorGrayLight"></View>
 
 </RelativeLayout>

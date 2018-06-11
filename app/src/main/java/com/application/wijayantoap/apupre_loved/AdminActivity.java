@@ -22,6 +22,7 @@ public class AdminActivity extends AppCompatActivity {
     private TextView mTextMessage;
     boolean doubleBackToExitPressedOnce = false;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -35,6 +36,9 @@ public class AdminActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_report:
                     transaction.replace(R.id.content, new AdminReportFragment()).commit();
+                    return true;
+                case R.id.navigation_flag:
+                    transaction.replace(R.id.content, new AdminFlagFragment()).commit();
                     return true;
                 case R.id.navigation_list:
                     transaction.replace(R.id.content, new AdminItemFragment()).commit();
@@ -52,7 +56,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         FragmentManager fragmentManager = getSupportFragmentManager();

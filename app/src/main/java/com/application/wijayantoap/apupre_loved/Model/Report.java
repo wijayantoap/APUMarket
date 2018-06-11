@@ -3,10 +3,7 @@ package com.application.wijayantoap.apupre_loved.Model;
 import android.widget.ToggleButton;
 
 public class Report {
-    private String Title;
-    private String Email;
-    private String Report;
-    private String Date;
+    private String Title, Email, Report, Date;
 
     private ToggleButton toggleButton;
 

@@ -9,10 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -40,6 +43,9 @@ public class AdminReportFragment extends Fragment {
     DatabaseReference reportList;
     FirebaseRecyclerAdapter adapter;
 
+    String currentSearch = "";
+
+    EditText editFind;
 
     public AdminReportFragment() {
         // Required empty public constructor
@@ -70,7 +76,20 @@ public class AdminReportFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        loadReport();
+        loadReport(currentSearch);
+
+        editFind = view.findViewById(R.id.editFind);
+        editFind.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    currentSearch = editFind.getText().toString();
+                    loadReport(currentSearch);
+                    adapter.startListening();
+                }
+                return true;
+            }
+        });
 
         return view;
     }
@@ -107,12 +126,12 @@ public class AdminReportFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void loadReport(){
+    private void loadReport(String currentSearch){
 
         Query query = FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child("Report");
+                .child("Report").orderByChild("email").startAt(currentSearch).endAt(currentSearch + "\uf8ff");;
 
         FirebaseRecyclerOptions<Report> options =
                 new FirebaseRecyclerOptions.Builder<Report>()

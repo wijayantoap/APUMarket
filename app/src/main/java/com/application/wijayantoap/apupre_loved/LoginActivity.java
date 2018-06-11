@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("username", editUsername.getText().toString());
+        editor.putString("search", "yes");
         editor.apply();
     }
 }
