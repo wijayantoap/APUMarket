@@ -113,7 +113,7 @@
             android:layout_marginRight="@dimen/product_item_margin"
             android:layout_marginTop="@dimen/product_item_margin"
             android:layout_marginBottom="5dp"
-            android:text="DESCRIPTION asjkhdhjkasdjhksdahjksadjksadhjksadjhkhasjkdhjksadhjkasdhjksadhkjsadhkjsdahkjsadhkjsadhkjsadhjksdahjksadhkjjhksadhjkasdhjkasdjhkasdhkjasdhkjasdhkj"
+            android:text="DESCRIPTION"
             android:textSize="@dimen/text_normal"
             />
 
@@ -141,6 +141,12 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/viewLine0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/textDescription"
+            android:background="@color/colorGrayLight"></View>
 
         <View
             android:id="@+id/viewLine"
@@ -183,11 +189,12 @@
             android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@id/viewLine"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="17dp"
             android:layout_marginBottom="@dimen/product_item_margin"
+            android:layout_marginRight="@dimen/product_item_margin"
             android:text="DATE POSTED"
             android:textSize="@dimen/text_normal"
             android:gravity="center_vertical"
@@ -198,10 +205,10 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_below="@id/viewLine"
-            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/product_item_margin"
             android:layout_marginTop="@dimen/product_item_margin"
             android:layout_marginBottom="@dimen/product_item_margin"
+            android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -227,9 +234,10 @@
             android:id="@+id/imgItem"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/textDescription"
+            android:layout_below="@id/viewLine0"
             android:src="@drawable/no_image_found"
-            android:scaleType="centerInside"/>
+            android:layout_marginTop="1dp"
+            android:scaleType="fitCenter" />
 
     </RelativeLayout>
 
