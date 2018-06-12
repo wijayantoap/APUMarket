@@ -80,7 +80,7 @@ public class AuctionActivity extends AppCompatActivity {
     }
 
     private void loadAuction(String username) {
-        Query query = auction.orderByChild("owner").equalTo(username);
+        Query query = auction.orderByChild(username).equalTo(username);
 
         final FirebaseRecyclerOptions<Auction> options =
                 new FirebaseRecyclerOptions.Builder<Auction>()

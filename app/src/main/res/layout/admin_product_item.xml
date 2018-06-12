@@ -236,8 +236,7 @@
             android:layout_height="200dp"
             android:layout_below="@id/viewLine0"
             android:src="@drawable/no_image_found"
-            android:layout_marginTop="1dp"
-            android:scaleType="fitCenter" />
+            android:layout_marginTop="1dp"/>
 
     </RelativeLayout>
 

@@ -103,7 +103,7 @@ public class UserItemActivity extends AppCompatActivity {
 
         rootLayout = findViewById(R.id.rootLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewItemUser);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -133,11 +133,6 @@ public class UserItemActivity extends AppCompatActivity {
             }
 
             @Override
-            public Item getItem(int position) {
-                return super.getItem(getItemCount() - 1 - position);
-            }
-
-            @Override
             protected void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position, @NonNull Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
@@ -147,7 +142,7 @@ public class UserItemActivity extends AppCompatActivity {
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
                 holder.itemViewer.setText(String.valueOf(model.getView()));
-                Picasso.with(getBaseContext()).load(model.getPicture())
+                Picasso.with(getBaseContext()).load(model.getPicture().toString()).fit().centerInside()
                         .into(holder.itemImage);
                 final Item clickItem = model;
                 holder.setItemClickListener(new ItemClickListener() {
@@ -159,7 +154,6 @@ public class UserItemActivity extends AppCompatActivity {
             }
 
         };
-        adapter.startListening();
         recyclerView.setAdapter(adapter);
     }
 
@@ -172,6 +166,11 @@ public class UserItemActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         adapter.stopListening();
     }
 

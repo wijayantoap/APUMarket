@@ -255,7 +255,6 @@
             android:layout_height="200dp"
             android:layout_below="@id/viewLine1"
             android:src="@drawable/no_image_found"
-            android:scaleType="fitCenter"
             />
 
     </RelativeLayout>

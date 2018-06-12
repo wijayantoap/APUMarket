@@ -20,7 +20,7 @@ public class ImageActivity extends AppCompatActivity {
         url = getIntent().getStringExtra("image_url");
 
         myImage = findViewById(R.id.imgView);
-        Picasso.with(this).load(url)
+        Picasso.with(this).load(url).fit().centerInside()
                 .into(myImage);
         myImage.setOnClickListener(new View.OnClickListener() {
             @Override

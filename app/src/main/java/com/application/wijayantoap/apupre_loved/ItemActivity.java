@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -59,13 +60,15 @@ public class ItemActivity extends AppCompatActivity {
 
     FirebaseRecyclerAdapter adapter;
 
+    Toolbar mActionBarToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +99,6 @@ public class ItemActivity extends AppCompatActivity {
 
         ImageView imageBackground = (ImageView) findViewById(R.id.image_id);
 
-
         // get intent
         if (getIntent() != null) {
             categoryId = getIntent().getStringExtra("CategoryId");
@@ -105,27 +107,27 @@ public class ItemActivity extends AppCompatActivity {
 
             switch (categoryId){
                 case "Vehicles": setTitle("Vehicles");
-                    Picasso.with(this).load("https://images.pexels.com/photos/990113/pexels-photo-990113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/990113/pexels-photo-990113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerInside()
                             .into(imageBackground);
                 break;
                 case "Electronics": setTitle("Electronics");
-                    Picasso.with(this).load("https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                     break;
                 case "Furniture": setTitle("Furniture");
-                    Picasso.with(this).load("https://images.pexels.com/photos/159839/office-home-house-desk-159839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/159839/office-home-house-desk-159839.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                     break;
                 case "Hobbies": setTitle("Hobbies");
-                    Picasso.with(this).load("https://images.pexels.com/photos/346709/pexels-photo-346709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/346709/pexels-photo-346709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                     break;
                 case "Clothes": setTitle("Clothes");
-                    Picasso.with(this).load("https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                     break;
                 case "Miscellaneous": setTitle("Miscellaneous");
-                    Picasso.with(this).load("https://images.pexels.com/photos/1712/sunglasses-apple-iphone-desk.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+                    Picasso.with(this).load("https://images.pexels.com/photos/1712/sunglasses-apple-iphone-desk.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                     break;
             }
@@ -163,7 +165,7 @@ public class ItemActivity extends AppCompatActivity {
                 holder.itemPhone.setText(model.getPhone());
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
-                Picasso.with(getBaseContext()).load(model.getPicture())
+                Picasso.with(getBaseContext()).load(model.getPicture()).fit().centerInside()
                         .into(holder.itemImage);
                 holder.layoutFlag.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -246,5 +248,15 @@ public class ItemActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         adapter.stopListening();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

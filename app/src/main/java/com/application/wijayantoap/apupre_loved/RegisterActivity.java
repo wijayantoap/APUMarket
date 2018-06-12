@@ -130,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                             Activity activity = new Activity(validateUsername, "Registered to APU Market", date);
                                             table_activity.push().setValue(activity);
+                                            table_auction.child(validateUsername).child(validateUsername).setValue(validateUsername);
                                             table_auction.child(validateUsername).child("owner").setValue(validateUsername);
                                             saveInfo();
                                             startActivity(i);

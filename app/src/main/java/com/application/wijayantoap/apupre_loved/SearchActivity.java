@@ -166,7 +166,7 @@ public class SearchActivity extends AppCompatActivity {
                 holder.itemPhone.setText(model.getPhone());
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
-                Picasso.with(getBaseContext()).load(model.getPicture())
+                Picasso.with(getBaseContext()).load(model.getPicture().toString()).fit().centerInside()
                         .into(holder.itemImage);
                 holder.layoutFlag.setOnClickListener(new View.OnClickListener() {
                     @Override
