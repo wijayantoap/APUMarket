@@ -194,6 +194,7 @@
                         android:textStyle="bold" />
 
                     <View
+                        android:id="@+id/viewTopScroll"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@id/textRecentActivity"
@@ -203,7 +204,7 @@
                         android:id="@+id/scrollRecentActivity"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@id/textRecentActivity">
+                        android:layout_below="@id/viewTopScroll">
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerViewProfileActivity"

@@ -10,7 +10,7 @@ import com.application.wijayantoap.apupre_loved.R;
 
 public class AuctionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView txtUsername;
+    public TextView txtUsername, txtLastMessage, txtTime;
     public RelativeLayout rootLayout;
 
     private ItemClickListener itemClickListener;
@@ -19,6 +19,8 @@ public class AuctionViewHolder extends RecyclerView.ViewHolder implements View.O
         super(itemView);
 
         txtUsername = itemView.findViewById(R.id.textUsername);
+        txtLastMessage = itemView.findViewById(R.id.textLastMessage);
+        txtTime = itemView.findViewById(R.id.textTime);
         rootLayout = itemView.findViewById(R.id.rootLayout);
     }
 

@@ -68,7 +68,7 @@ public class UserItemActivity extends AppCompatActivity {
     EditText editTitle, editPrice, editDescription, editQuality, editPhone;
     TextView txtImgPath;
     Spinner spinnerCategory;
-    Button btnChoose, btnUpload, btnSubmit;
+    Button btnChoose;
 
     FirebaseRecyclerAdapter adapter;
     DatabaseReference table_activity, table_user;

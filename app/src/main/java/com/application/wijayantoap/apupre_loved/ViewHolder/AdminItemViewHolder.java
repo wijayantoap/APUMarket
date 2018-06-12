@@ -8,9 +8,10 @@ import android.widget.TextView;
 
 import com.application.wijayantoap.apupre_loved.Common.Common;
 import com.application.wijayantoap.apupre_loved.Interface.ItemClickListener;
+import com.application.wijayantoap.apupre_loved.Model.Item;
 import com.application.wijayantoap.apupre_loved.R;
 
-public class AdminItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
+public class AdminItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, View.OnLongClickListener {
     public TextView itemTitle, itemPrice, itemUsername, itemDescription, itemPhone, itemDate, itemQuality, itemViewer;
     public ImageView itemImage;
 
@@ -49,5 +50,12 @@ public class AdminItemViewHolder extends RecyclerView.ViewHolder implements View
         menu.add(0,0,getAdapterPosition(), Common.UPDATE );
         menu.add(0,0,getAdapterPosition(), Common.DELETE );
 
+    }
+
+    @Override
+    public boolean onLongClick(View v)
+    {
+        String nameMed = itemUsername.getText().toString();
+        return true;
     }
 }

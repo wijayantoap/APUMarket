@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull final CategoryViewHolder holder, int position, @NonNull final Category model) {
                 holder.txtMenuName.setText(model.getName());
-                Picasso.with(getActivity()).load(model.getImage()).fit().centerInside()
+                Picasso.with(getActivity()).load(model.getImage()).fit().centerCrop()
                         .into(holder.imageView);
                 final Category clickItem = model;
                 holder.setItemClickListener(new ItemClickListener() {

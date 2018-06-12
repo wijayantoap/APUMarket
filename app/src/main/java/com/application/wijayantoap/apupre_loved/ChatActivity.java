@@ -36,6 +36,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,6 +50,7 @@ public class ChatActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference message;
+    DatabaseReference auction;
 
     FirebaseRecyclerAdapter adapter;
 
@@ -65,12 +67,14 @@ public class ChatActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         message = database.getReference("Message");
+        auction = database.getReference("Auction");
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("userInfo", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
 
-        DateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm");
+        DateFormat df = new SimpleDateFormat("dd MMM yyyy kk:mm");
         final String date = df.format(Calendar.getInstance().getTime());
+
 
         recyclerView = findViewById(R.id.recyclerViewMessage);
         layoutManager = new LinearLayoutManager(this);
@@ -104,6 +108,8 @@ public class ChatActivity extends AppCompatActivity {
                             Message newMessage = new Message(username, messageVerif, date);
                             message.child(chatId).push().setValue(newMessage);
                             editText.setText("");
+                            auction.child(chatId).child("lastMessage").setValue(messageVerif);
+                            auction.child(chatId).child("time").setValue(date);
                         }
 
                         @Override
@@ -120,7 +126,6 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMessage() {
         Query query = message.child(chatId);
-        Toast.makeText(this, ""+chatId, Toast.LENGTH_SHORT).show();
 
         FirebaseRecyclerOptions<Message> options =
                 new FirebaseRecyclerOptions.Builder<Message>()

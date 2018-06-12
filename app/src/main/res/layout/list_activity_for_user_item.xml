@@ -13,7 +13,6 @@
         android:layout_marginTop="@dimen/list_item_activity_for_user_margin_big"
         android:layout_toLeftOf="@+id/textActivityDate"
         android:text="ACTIVITY"
-        android:textStyle="bold"
         android:textColor="@color/colorGray"/>
 
     <TextView
@@ -25,6 +24,8 @@
         android:layout_marginRight="@dimen/list_item_activity_for_user_margin_normal"
         android:layout_marginTop="@dimen/list_item_activity_for_user_margin_big"
         android:textColor="@color/colorGray"
-        android:text="DATE"/>
+        android:text="DATE"
+        android:textSize="@dimen/text_normal"
+        android:background="@drawable/rounded_corner_textview"/>
 
 </RelativeLayout>

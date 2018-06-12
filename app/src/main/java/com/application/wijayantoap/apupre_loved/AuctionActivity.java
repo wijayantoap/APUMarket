@@ -106,6 +106,8 @@ public class AuctionActivity extends AppCompatActivity {
                 final String owner = adapter.getRef(position).getKey().toString();
 
                 holder.txtUsername.setText(owner);
+                holder.txtLastMessage.setText(model.getLastMessage());
+                holder.txtTime.setText(model.getTime());
                 final Auction clickItem = model;
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
