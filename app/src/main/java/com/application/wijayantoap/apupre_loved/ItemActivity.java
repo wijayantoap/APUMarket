@@ -70,14 +70,6 @@ public class ItemActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
@@ -107,7 +99,7 @@ public class ItemActivity extends AppCompatActivity {
 
             switch (categoryId){
                 case "Vehicles": setTitle("Vehicles");
-                    Picasso.with(this).load("https://images.pexels.com/photos/990113/pexels-photo-990113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerInside()
+                    Picasso.with(this).load("https://images.pexels.com/photos/990113/pexels-photo-990113.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940").fit().centerCrop()
                             .into(imageBackground);
                 break;
                 case "Electronics": setTitle("Electronics");

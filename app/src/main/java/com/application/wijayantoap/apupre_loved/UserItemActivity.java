@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -82,6 +83,9 @@ public class UserItemActivity extends AppCompatActivity {
     String date;
     Item newItem;
 
+    Toolbar mActionBarToolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +96,11 @@ public class UserItemActivity extends AppCompatActivity {
 
         DateFormat df = new SimpleDateFormat("dd MMM yyyy");
         date = df.format(Calendar.getInstance().getTime());
+
+        mActionBarToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mActionBarToolbar);
+        getSupportActionBar().setTitle("Your item");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Firebase
         database = FirebaseDatabase.getInstance();
@@ -116,6 +125,16 @@ public class UserItemActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void loadListItem(String usernameExtra) {
         Query query = itemList.orderByChild("username").equalTo(usernameExtra);
 
@@ -133,7 +152,7 @@ public class UserItemActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position, @NonNull Item model) {
+            protected void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position, @NonNull final Item model) {
                 holder.itemTitle.setText(model.getName());
                 holder.itemUsername.setText(model.getUsername());
                 holder.itemPrice.setText(model.getPrice());
@@ -149,6 +168,14 @@ public class UserItemActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         //
+                    }
+                });
+                holder.itemImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent= new Intent(UserItemActivity.this, ImageActivity.class);
+                        intent.putExtra("image_url", model.getPicture().toString());
+                        startActivity(intent);
                     }
                 });
             }

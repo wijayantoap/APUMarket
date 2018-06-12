@@ -42,6 +42,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -73,7 +74,7 @@ public class AdminItemFragment extends Fragment {
     EditText editTitle, editPrice, editDescription, editQuality, editPhone;
     Spinner spinnerCategory;
     Button btnChoose;
-    String category, username;
+    String category, username, mImageUrl;
 
     FrameLayout rootLayout;
 
@@ -82,6 +83,7 @@ public class AdminItemFragment extends Fragment {
 
     private final int PICK_IMAGE_REQUEST = 71;
     Uri saveUri;
+    FirebaseStorage storage;
     StorageReference storageReference;
 
     public AdminItemFragment() {
@@ -108,6 +110,8 @@ public class AdminItemFragment extends Fragment {
         itemList = database.getReference("Item");
         table_user = database.getReference("User");
         table_activity = database.getReference("Activity");
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         rootLayout = view.findViewById(R.id.rootLayout);
 
@@ -194,7 +198,7 @@ public class AdminItemFragment extends Fragment {
                 holder.itemDate.setText(model.getDate());
                 holder.itemQuality.setText(model.getQuality());
                 holder.itemViewer.setText(String.valueOf(model.getView()));
-                Picasso.with(getActivity()).load(model.getPicture())
+                Picasso.with(getActivity()).load(model.getPicture()).fit().centerInside()
                         .into(holder.itemImage);
                 final Item clickItem = model;
                 holder.itemImage.setOnClickListener(new View.OnClickListener() {
@@ -253,6 +257,8 @@ public class AdminItemFragment extends Fragment {
 
     private void deleteItem(String key, Item item) {
         username = item.getUsername();
+        String imageName = item.getPicture();
+
         itemList.child(key).removeValue();
         Activity activity = new Activity(username, "Item deleted by admin", date);
         table_activity.push().setValue(activity);

@@ -3,32 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/textTime"
-        android:background="@color/colorGrayLight"></View>
+    <ImageView
+        android:id="@+id/imgUser"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/circle_logo_gray" />
 
-    <TextView
-        android:id="@+id/textMessage"
+    <LinearLayout
+        android:id="@+id/layoutMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="20dp"
-        android:text="message"
-        android:textStyle="bold"/>
+        android:layout_toRightOf="@id/imgUser"
+        android:background="@drawable/rounded_corner_textview"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_corner_textview"
+            android:text="message" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_below="@id/layoutMessage"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:text="message"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/textMessage"
-        android:textSize="@dimen/text_normal"/>
+        android:layout_toRightOf="@id/imgUser"
+        android:text="DATE"
+        android:textSize="@dimen/text_normal" />
 
 
 </RelativeLayout>

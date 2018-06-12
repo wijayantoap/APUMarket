@@ -48,7 +48,8 @@
         <activity
             android:name=".UserItemActivity"
             android:label="@string/title_activity_user_item"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SearchActivity"
             android:screenOrientation="portrait"

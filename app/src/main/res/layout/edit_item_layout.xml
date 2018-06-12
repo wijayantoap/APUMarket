@@ -15,7 +15,9 @@
             android:id="@+id/editTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name of the item"/>
+            android:hint="Name of the item"
+            android:inputType="text"
+            android:maxLines="1"/>
         <EditText
             android:id="@+id/editPrice"
             android:hint="Price (RM)"
@@ -44,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Phone number"/>
+            android:hint="Phone number" />
 
         <Button
             android:id="@+id/btnChoose"

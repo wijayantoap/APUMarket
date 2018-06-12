@@ -142,7 +142,8 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull MessageViewHolder holder, final int position, @NonNull final Message model) {
-                holder.textMessage.setText(model.getSender()+": " +model.getMessage());
+                holder.textUsername.setText(model.getSender());
+                holder.textMessage.setText(model.getMessage());
                 holder.textTimeStamp.setText(model.getTimeStamp());
             }
 
