@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                         || validatePasswordConfirmation.matches("")) {
                     Toast.makeText(RegisterActivity.this, "Everything must be filled", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (length < 5) {
+                    if (length <= 5) {
                         Toast.makeText(RegisterActivity.this, "Password must be more than 5 characters", Toast.LENGTH_SHORT).show();
                     } else {
 
@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Toast.makeText(RegisterActivity.this, "User already exist", Toast.LENGTH_SHORT).show();
                                         } else {
                                             mDialog.dismiss();
-                                            User user = new User(validateEmail, validatePassword, 0, "active", 0);
+                                            User user = new User(validateEmail, validatePassword, "active", 0);
                                             table_user.child(validateUsername).setValue(user);
                                             Toast.makeText(RegisterActivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
                                             Intent i = new Intent(RegisterActivity.this, MainActivity.class);

@@ -67,7 +67,7 @@ public class UserItemActivity extends AppCompatActivity {
     String usernameExtra = "";
 
     EditText editTitle, editPrice, editDescription, editQuality, editPhone;
-    TextView txtImgPath;
+    TextView txtImgPath, txtViewer;
     Spinner spinnerCategory;
     Button btnChoose;
 
@@ -223,15 +223,6 @@ public class UserItemActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
-    private void deleteItem(String key) {
-        itemList.child(key).removeValue();
-        Activity activity = new Activity(username, "Item deleted", date);
-        table_activity.push().setValue(activity);
-        Snackbar.make(rootLayout, "Item deleted", Snackbar.LENGTH_SHORT).show();
-        adapter.notifyDataSetChanged();
-    }
-
-
     private void showUpdateDialog(final String key, final Item item) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserItemActivity.this);
         alertDialog.setTitle("Edit");
@@ -248,6 +239,7 @@ public class UserItemActivity extends AppCompatActivity {
         spinnerCategory = edit_item_layout.findViewById(R.id.spinnerCategory);
         btnChoose = edit_item_layout.findViewById(R.id.btnChoose);
         txtImgPath = edit_item_layout.findViewById(R.id.imgPath);
+        txtViewer = edit_item_layout.findViewById(R.id.txtViewer);
 
         editTitle.setText(item.getName());
         editPrice.setText(item.getPrice());
@@ -255,6 +247,8 @@ public class UserItemActivity extends AppCompatActivity {
         editQuality.setText(item.getQuality());
         editPhone.setText(item.getPhone());
         txtImgPath.setText(item.getPicture());
+        txtViewer.setText(String.valueOf(item.getView()));
+
 
         editQuality.setFilters(new InputFilter[]{new InputFilterMinMax("1", "5")});
 
@@ -279,7 +273,8 @@ public class UserItemActivity extends AppCompatActivity {
                 newItem = new Item(editTitle.getText().toString(), username,
                         editDescription.getText().toString(), editPrice.getText().toString(),
                         txtImgPath.getText().toString(), editQuality.getText().toString(),
-                        editPhone.getText().toString(), date, category, 0, editTitle.getText().toString().toLowerCase());
+                        editPhone.getText().toString(), date, category,
+                        Integer.valueOf(txtViewer.getText().toString()), editTitle.getText().toString().toLowerCase());
 
                 itemList.child(key).setValue(newItem);
                 Snackbar.make(rootLayout, "Item edited", Snackbar.LENGTH_SHORT).show();
@@ -295,6 +290,14 @@ public class UserItemActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
+        adapter.notifyDataSetChanged();
+    }
+
+    private void deleteItem(String key) {
+        itemList.child(key).removeValue();
+        Activity activity = new Activity(username, "Item deleted", date);
+        table_activity.push().setValue(activity);
+        Snackbar.make(rootLayout, "Item deleted", Snackbar.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
 

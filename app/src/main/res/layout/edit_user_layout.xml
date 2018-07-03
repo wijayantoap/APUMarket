@@ -29,12 +29,6 @@
                 android:textSize="@dimen/text_big" />
 
             <TextView
-                android:text="Report"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_big" />
-
-            <TextView
                 android:text="Status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -70,7 +70,7 @@ public class AdminItemFragment extends Fragment {
 
     EditText editFind;
     String currentSearch = "";
-    TextView txtImgPath;
+    TextView txtImgPath, txtViewer;
     EditText editTitle, editPrice, editDescription, editQuality, editPhone;
     Spinner spinnerCategory;
     Button btnChoose;
@@ -283,6 +283,7 @@ public class AdminItemFragment extends Fragment {
         spinnerCategory = edit_item_layout.findViewById(R.id.spinnerCategory);
         btnChoose = edit_item_layout.findViewById(R.id.btnChoose);
         txtImgPath = edit_item_layout.findViewById(R.id.imgPath);
+        txtViewer = edit_item_layout.findViewById(R.id.txtViewer);
 
         editTitle.setText(item.getName());
         editPrice.setText(item.getPrice());
@@ -290,6 +291,7 @@ public class AdminItemFragment extends Fragment {
         editQuality.setText(item.getQuality());
         editPhone.setText(item.getPhone());
         txtImgPath.setText(item.getPicture());
+        txtViewer.setText(String.valueOf(item.getView()));
 
         username = item.getUsername();
 
@@ -316,7 +318,7 @@ public class AdminItemFragment extends Fragment {
                 newItem = new Item(editTitle.getText().toString(), username,
                         editDescription.getText().toString(), editPrice.getText().toString(),
                         txtImgPath.getText().toString(), editQuality.getText().toString(),
-                        editPhone.getText().toString(), date, category, 0, editTitle.getText().toString().toLowerCase());
+                        editPhone.getText().toString(), date, category, Integer.valueOf(txtViewer.getText().toString()), editTitle.getText().toString().toLowerCase());
 
                 itemList.child(key).setValue(newItem);
                 Snackbar.make(rootLayout, "Item edited", Snackbar.LENGTH_SHORT).show();

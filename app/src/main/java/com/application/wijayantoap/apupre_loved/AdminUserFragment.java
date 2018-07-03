@@ -238,7 +238,6 @@ public class AdminUserFragment extends Fragment {
 
         textUsername.setText(key);
         textEmail.setText(user.getEmail());
-        textReport.setText(String.valueOf(user.getReport()));
         textItem.setText(String.valueOf(user.getItem()));
 
         alertDialog.setView(edit_item_layout);
@@ -251,7 +250,7 @@ public class AdminUserFragment extends Fragment {
                 dialog.dismiss();
                 status = spinnerStatus.getSelectedItem().toString();
 
-                newUser = new User(user.getEmail(), user.getPassword(), user.getReport(), status, user.getItem());
+                newUser = new User(user.getEmail(), user.getPassword(), status, user.getItem());
 
                 userList.child(key).setValue(newUser);
                 if (status.matches("inactive")) {

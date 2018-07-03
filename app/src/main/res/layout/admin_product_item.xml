@@ -117,30 +117,6 @@
             android:textSize="@dimen/text_normal"
             />
 
-        <LinearLayout
-            android:id="@+id/layoutFlag"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/textTitle"
-            android:layout_marginRight="@dimen/product_item_margin"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@drawable/ic_flag" />
-
-            <TextView
-                android:id="@+id/textFlag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="@dimen/text_normal"
-                />
-
-        </LinearLayout>
-
         <View
             android:id="@+id/viewLine0"
             android:layout_width="match_parent"
